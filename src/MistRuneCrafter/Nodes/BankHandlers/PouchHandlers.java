@@ -1,6 +1,7 @@
 package MistRuneCrafter.Nodes.BankHandlers;
 
 import MistRuneCrafter.MistRuneCrafter;
+import MistRuneCrafter.Nodes.Globals;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Calculations;
@@ -40,16 +41,16 @@ import org.powerbot.game.api.wrappers.node.SceneObject;
 
 public class PouchHandlers extends Node{
 
-    Tile bankTile = new Tile(3186,3438,0);
+    Tile bankTile = new Tile(3182,3438,0);
 
     @Override
     public boolean activate(){
-        return (Inventory.contains(5155) && Calculations.distanceTo(bankTile)<=8);
+        return (false);
     }
 
     @Override
     public void execute(){
-        SceneObject bankBooth = SceneEntities.getNearest(BankHandler.BANK_BOOTH_IDS);
+        SceneObject bankBooth = SceneEntities.getNearest(Globals.BANK_BOOTH_IDS);
 
         if(!Bank.isOpen()){
             MistRuneCrafter.status = "Opening bank booth.";
@@ -69,17 +70,17 @@ public class PouchHandlers extends Node{
             MistRuneCrafter.status = "Depositing inventory.";
             Bank.depositInventory();
             MistRuneCrafter.status = "Withdrawing Astral Rune.";
-            Bank.withdraw(BankHandler.ID_RUNE_ASTRAL, 1);
+            Bank.withdraw(Globals.ID_RUNE_ASTRAL, 1);
             Task.sleep(500,750);
             MistRuneCrafter.status = "Withdrawing Cosmic Rune.";
-            Bank.withdraw(BankHandler.ID_RUNE_COSMIC, 1);
+            Bank.withdraw(Globals.ID_RUNE_COSMIC, 1);
             Task.sleep(500,750);
             MistRuneCrafter.status = "Withdrawing Air Runes.";
-            Bank.withdraw(BankHandler.ID_RUNE_AIR, 2);
+            Bank.withdraw(Globals.ID_RUNE_AIR, 2);
             Task.sleep(500,750);
-            for(int x = 0; x<= BankHandler.ITEMS_OPTIONAL.length-1; x++){
+            for(int x = 0; x<= Globals.ITEMS_OPTIONAL.length-1; x++){
                 MistRuneCrafter.status = "Withdrawing pouches.";
-                Bank.withdraw(BankHandler.ITEMS_OPTIONAL[x], BankHandler.ITEMS_OPTIONAL_AMOUNTS[x]);
+                Bank.withdraw(Globals.ITEMS_OPTIONAL[x], Globals.ITEMS_OPTIONAL_AMOUNTS[x]);
                 Task.sleep(500,1000);
             };
             int x = 0;
@@ -113,7 +114,7 @@ public class PouchHandlers extends Node{
 //Child 18, Click
 //WIDGET 1184, Child 13, "<p=2>A simple"
 //Child 18, Click
-        Keyboard.sendText("0", false);
+        Keyboard.sendText("-", false);
         int x = 0;
         do{
             x++;

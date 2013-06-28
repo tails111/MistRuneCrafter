@@ -2,6 +2,7 @@ package MistRuneCrafter.Nodes.WalkingHandlers;
 
 import MistRuneCrafter.MistRuneCrafter;
 import MistRuneCrafter.Nodes.BankHandlers.BankHandler;
+import MistRuneCrafter.Nodes.Globals;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Calculations;
@@ -23,7 +24,7 @@ public class WalkToBank extends Node {
 
     @Override
     public boolean activate(){
-        return (Inventory.contains(4695) && !Inventory.contains(BankHandler.ID_PURE_ESS) && Calculations.distanceTo(bankTile)>=7);
+        return (Inventory.contains(4695) && !Inventory.contains(Globals.ID_PURE_ESS) && Calculations.distanceTo(bankTile)>=7);
     }
 
     @Override
@@ -31,6 +32,7 @@ public class WalkToBank extends Node {
         if(Calculations.distanceTo(altarExit)<=8){
             SceneObject ruinExit = SceneEntities.getNearest(AIR_EXIT);
             if(ruinExit != null){
+                MistRuneCrafter.interacting=ruinExit;
                 Camera.turnTo(ruinExit);
                 MistRuneCrafter.status="Clicking portal";
                 ruinExit.interact("Enter");

@@ -4,18 +4,19 @@
     <list default="true" id="18d8493a-174b-4179-b98e-253b15fe98a9" name="Default" comment="" />
     <ignored path="MistRuneCrafter.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/MistRuneCrafter.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372209220468" ignored="false" />
-    <file path="/BankHandler.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372284492222" ignored="false" />
-    <file path="/PouchHandlers.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372281254798" ignored="false" />
-    <file path="/CraftingHandler.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372276232262" ignored="false" />
+    <file path="/MistRuneCrafter.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372388823278" ignored="false" />
+    <file path="/BankHandler.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372391810820" ignored="false" />
+    <file path="/PouchHandlers.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372389309822" ignored="false" />
+    <file path="/CraftingHandler.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372391686421" ignored="false" />
     <file path="/ImbueHandler.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372212641841" ignored="false" />
     <file path="/EnterAltar.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372191176234" ignored="false" />
     <file path="/ExitAltar.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372191188949" ignored="false" />
-    <file path="/WalkToAltar.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372213481339" ignored="false" />
-    <file path="/WalkToBank.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372214189617" ignored="false" />
+    <file path="/WalkToAltar.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372391422818" ignored="false" />
+    <file path="/WalkToBank.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372388280053" ignored="false" />
     <file path="/fragment.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372191381649" ignored="false" />
     <file path="/EquipmentHandler.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372206259436" ignored="false" />
-    <file path="/EmptyPouchHandler.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372278771608" ignored="false" />
+    <file path="/EmptyPouchHandler.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372389405631" ignored="false" />
+    <file path="/Globals.java" changelist="18d8493a-174b-4179-b98e-253b15fe98a9" time="1372391677438" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +31,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -67,6 +67,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -79,7 +80,7 @@
       <file leaf-file-name="CraftingHandler.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/CraftingHandlers/CraftingHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="25" selection-start="1334" selection-end="1334" vertical-scroll-proportion="0.0">
+            <state line="73" column="10" selection-start="2967" selection-end="2967" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -88,7 +89,18 @@
       <file leaf-file-name="BankHandler.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/BankHandlers/BankHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="152" column="36" selection-start="5897" selection-end="5897" vertical-scroll-proportion="0.40350878">
+            <state line="108" column="41" selection-start="3682" selection-end="3682" vertical-scroll-proportion="0.66520786">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Globals.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/Globals.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="19" selection-start="1208" selection-end="1208" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -97,10 +109,8 @@
       <file leaf-file-name="PouchHandlers.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/BankHandlers/PouchHandlers.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="10" selection-start="2103" selection-end="2103" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="42" column="10" selection-start="1432" selection-end="1432" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -108,10 +118,8 @@
       <file leaf-file-name="EmptyPouchHandler.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/CraftingHandlers/EmptyPouchHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="43" selection-start="1583" selection-end="1583" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="26" column="42" selection-start="829" selection-end="829" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -119,7 +127,7 @@
       <file leaf-file-name="ImbueHandler.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/CraftingHandlers/ImbueHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="12" selection-start="815" selection-end="880" vertical-scroll-proportion="0.0">
+            <state line="23" column="44" selection-start="789" selection-end="789" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -128,7 +136,7 @@
       <file leaf-file-name="WalkToAltar.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/WalkingHandlers/WalkToAltar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="42" selection-start="1728" selection-end="1728" vertical-scroll-proportion="0.0">
+            <state line="39" column="50" selection-start="1590" selection-end="1590" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -137,7 +145,7 @@
       <file leaf-file-name="MistRuneCrafter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/MistRuneCrafter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="0" selection-start="1454" selection-end="1454" vertical-scroll-proportion="0.0">
+            <state line="35" column="26" selection-start="1568" selection-end="1568" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -146,7 +154,7 @@
       <file leaf-file-name="WalkToBank.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/WalkingHandlers/WalkToBank.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="5" selection-start="967" selection-end="1005" vertical-scroll-proportion="0.0">
+            <state line="33" column="53" selection-start="1420" selection-end="1420" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -167,12 +175,13 @@
         <option value="$PROJECT_DIR$/src/MistRuneCrafter/Nodes/WalkingHandlers/WalkingHandler.java" />
         <option value="$PROJECT_DIR$/src/MistRuneCrafter/Nodes/BankHandlers/EquipmentHandler.java" />
         <option value="$PROJECT_DIR$/src/MistRuneCrafter/Nodes/CraftingHandlers/ImbueHandler.java" />
-        <option value="$PROJECT_DIR$/src/MistRuneCrafter/Nodes/WalkingHandlers/WalkToAltar.java" />
         <option value="$PROJECT_DIR$/src/MistRuneCrafter/Nodes/WalkingHandlers/WalkToBank.java" />
-        <option value="$PROJECT_DIR$/src/MistRuneCrafter/Nodes/CraftingHandlers/CraftingHandler.java" />
-        <option value="$PROJECT_DIR$/src/MistRuneCrafter/Nodes/CraftingHandlers/EmptyPouchHandler.java" />
         <option value="$PROJECT_DIR$/src/MistRuneCrafter/Nodes/BankHandlers/PouchHandlers.java" />
         <option value="$PROJECT_DIR$/src/MistRuneCrafter/MistRuneCrafter.java" />
+        <option value="$PROJECT_DIR$/src/MistRuneCrafter/Nodes/CraftingHandlers/EmptyPouchHandler.java" />
+        <option value="$PROJECT_DIR$/src/MistRuneCrafter/Nodes/WalkingHandlers/WalkToAltar.java" />
+        <option value="$PROJECT_DIR$/src/MistRuneCrafter/Nodes/Globals.java" />
+        <option value="$PROJECT_DIR$/src/MistRuneCrafter/Nodes/CraftingHandlers/CraftingHandler.java" />
         <option value="$PROJECT_DIR$/src/MistRuneCrafter/Nodes/BankHandlers/BankHandler.java" />
       </list>
     </option>
@@ -180,7 +189,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1616" />
+    <option name="width" value="1612" />
     <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -209,6 +218,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -246,6 +257,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="MistRuneCrafter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistRuneCrafter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistRuneCrafter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MistRuneCrafter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Nodes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -329,8 +362,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -349,9 +380,9 @@
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager" selected="Application.Boot">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -366,6 +397,19 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -394,19 +438,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -480,8 +511,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1612" height="876" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -490,7 +521,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32962447" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32823366" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -499,8 +530,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15958816" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32962447" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15935484" sideWeight="0.67176634" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32823366" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962447" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -573,35 +604,26 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/CraftingHandlers/CraftingHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="41" selection-start="1324" selection-end="1324" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/BankHandlers/BankHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="184" column="39" selection-start="7035" selection-end="7035" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/BankHandlers/PouchHandlers.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="39" selection-start="121" selection-end="133" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/CraftingHandlers/EmptyPouchHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="32" selection-start="1016" selection-end="1016" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -633,63 +655,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/WalkingHandlers/WalkToAltar.java">
+    <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/MistRuneCrafter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="42" selection-start="1728" selection-end="1728" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/CraftingHandlers/CraftingHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="25" selection-start="1334" selection-end="1334" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/WalkingHandlers/WalkToBank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="5" selection-start="967" selection-end="1005" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/CraftingHandlers/ImbueHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="12" selection-start="815" selection-end="880" vertical-scroll-proportion="0.0">
+        <state line="35" column="26" selection-start="1568" selection-end="1568" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/CraftingHandlers/EmptyPouchHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="43" selection-start="1583" selection-end="1583" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="26" column="42" selection-start="829" selection-end="829" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/CraftingHandlers/ImbueHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="44" selection-start="789" selection-end="789" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/BankHandlers/PouchHandlers.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="10" selection-start="2103" selection-end="2103" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="42" column="10" selection-start="1432" selection-end="1432" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/MistRuneCrafter.java">
+    <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/WalkingHandlers/WalkToBank.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="1454" selection-end="1454" vertical-scroll-proportion="0.0">
+        <state line="33" column="53" selection-start="1420" selection-end="1420" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/WalkingHandlers/WalkToAltar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="50" selection-start="1590" selection-end="1590" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/Globals.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="19" selection-start="1208" selection-end="1208" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/CraftingHandlers/CraftingHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="10" selection-start="2967" selection-end="2967" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MistRuneCrafter/Nodes/BankHandlers/BankHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="152" column="36" selection-start="5897" selection-end="5897" vertical-scroll-proportion="0.40350878">
-          <folding />
+        <state line="108" column="41" selection-start="3682" selection-end="3682" vertical-scroll-proportion="0.66520786">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

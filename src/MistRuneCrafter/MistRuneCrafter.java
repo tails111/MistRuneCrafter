@@ -1,6 +1,7 @@
 package MistRuneCrafter;
 
 import MistRuneCrafter.Nodes.BankHandlers.BankHandler;
+import MistRuneCrafter.Nodes.BankHandlers.PouchHandlers;
 import MistRuneCrafter.Nodes.CraftingHandlers.CraftingHandler;
 import MistRuneCrafter.Nodes.CraftingHandlers.EmptyPouchHandler;
 import MistRuneCrafter.Nodes.WalkingHandlers.WalkToAltar;
@@ -31,10 +32,9 @@ public class MistRuneCrafter extends ActiveScript implements PaintListener{
 
     private Tree script = new Tree(new Node[]{
             new BankHandler(),
-
             new WalkToAltar(),
             new CraftingHandler(),
-            new WalkToBank()
+            new WalkToBank(),
     });
 
     public static int postedProfit = 0;

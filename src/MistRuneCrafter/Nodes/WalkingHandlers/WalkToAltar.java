@@ -2,6 +2,7 @@ package MistRuneCrafter.Nodes.WalkingHandlers;
 
 import MistRuneCrafter.MistRuneCrafter;
 import MistRuneCrafter.Nodes.BankHandlers.BankHandler;
+import MistRuneCrafter.Nodes.Globals;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Calculations;
@@ -9,6 +10,7 @@ import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.SceneEntities;
 import org.powerbot.game.api.methods.tab.Inventory;
+import org.powerbot.game.api.methods.widget.Bank;
 import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.node.SceneObject;
@@ -28,7 +30,7 @@ public class WalkToAltar  extends Node {
 
     @Override
     public boolean activate(){
-        return (Calculations.distanceTo(altar)>=3 && Inventory.containsAll(BankHandler.ITEMS_REQUIRED));
+        return (Calculations.distanceTo(altar)>=3 && Inventory.containsAll(Globals.ITEMS_REQUIRED) && !Bank.isOpen());
     }
 
     @Override
@@ -37,6 +39,7 @@ public class WalkToAltar  extends Node {
        if(Calculations.distanceTo(altarEntrance)<=4){
             SceneObject toAltar = SceneEntities.getNearest(AIR_RUINS);
             if(toAltar != null){
+                MistRuneCrafter.interacting=toAltar;
                 Camera.turnTo(toAltar);
                 MistRuneCrafter.status="Clicking altar";
                 toAltar.interact("Enter");

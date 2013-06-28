@@ -1,6 +1,7 @@
 package MistRuneCrafter.Nodes.CraftingHandlers;
 
 import MistRuneCrafter.Nodes.BankHandlers.BankHandler;
+import MistRuneCrafter.Nodes.Globals;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Calculations;
@@ -16,7 +17,7 @@ public class ImbueHandler extends Node {
 
     @Override
     public boolean activate(){
-        return(Inventory.containsAll(BankHandler.ITEMS_REQUIRED) && Settings.get(4)==1282);
+        return(Inventory.containsAll(Globals.ITEMS_REQUIRED) && Settings.get(4)==1282);
     }
 
     @Override
