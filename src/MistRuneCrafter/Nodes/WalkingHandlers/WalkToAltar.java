@@ -12,6 +12,8 @@ import org.powerbot.game.api.methods.node.SceneEntities;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Bank;
 import org.powerbot.game.api.methods.widget.Camera;
+import org.powerbot.game.api.util.Random;
+import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.node.SceneObject;
 
@@ -30,27 +32,30 @@ public class WalkToAltar  extends Node {
 
     @Override
     public boolean activate(){
-        return (Calculations.distanceTo(altar)>=3 && Inventory.containsAll(Globals.ITEMS_REQUIRED) && !Bank.isOpen());
+        SceneObject runeCraftAltar = SceneEntities.getNearest(AIR_ALTAR);
+        return (Calculations.distanceTo(altar)>=3 && Inventory.containsAll(Globals.ITEMS_REQUIRED) && !Bank.isOpen()
+            && runeCraftAltar == null);
     }
 
     @Override
     public void execute(){
+       MistRuneCrafter.status="Walking to Altar.";
        Walking.newTilePath(toAltar).traverse();
        if(Calculations.distanceTo(altarEntrance)<=4){
-            SceneObject toAltar = SceneEntities.getNearest(AIR_RUINS);
-            if(toAltar != null){
-                MistRuneCrafter.interacting=toAltar;
-                Camera.turnTo(toAltar);
-                MistRuneCrafter.status="Clicking altar";
-                toAltar.interact("Enter");
-                int x = 0;
+           SceneObject toAltar = SceneEntities.getNearest(AIR_RUINS);
+           Timer timeCheck = new Timer(Random.nextInt(10000, 15000));
+           if(toAltar != null){
+               SceneObject runeCraftAltar = SceneEntities.getNearest(AIR_ALTAR);
+               MistRuneCrafter.interacting=toAltar;
+               Camera.turnTo(toAltar);
+               MistRuneCrafter.status="Clicking altar";
+               toAltar.interact("Enter");
                 do{
-                    Task.sleep(600,850);
-                    x++;
-                    MistRuneCrafter.status="Waiting to enter altar.";
-                }while(Calculations.distanceTo(altar)<=4 && x<=500 && Players.getLocal().isMoving());
-            }
-           Walking.walk(altar);
+                    Task.sleep(60,85);
+                    MistRuneCrafter.status="Waiting to enter altar for: " + (timeCheck.getRemaining()/1000);
+                }while(runeCraftAltar == null && timeCheck.isRunning() && Players.getLocal().isMoving());
+           }
+           MistRuneCrafter.status="Done walking to Altar.";
        }
     }
 }

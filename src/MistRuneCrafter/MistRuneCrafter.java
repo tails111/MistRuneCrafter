@@ -34,7 +34,7 @@ public class MistRuneCrafter extends ActiveScript implements PaintListener{
             new BankHandler(),
             new WalkToAltar(),
             new CraftingHandler(),
-            new WalkToBank(),
+            new WalkToBank()
     });
 
     public static int postedProfit = 0;

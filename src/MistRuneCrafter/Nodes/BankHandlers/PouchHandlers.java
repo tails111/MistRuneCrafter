@@ -5,14 +5,20 @@ import MistRuneCrafter.Nodes.Globals;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Calculations;
+import org.powerbot.game.api.methods.Settings;
 import org.powerbot.game.api.methods.Widgets;
 import org.powerbot.game.api.methods.input.Keyboard;
 import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.node.SceneEntities;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Bank;
+import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.Tile;
+import org.powerbot.game.api.wrappers.node.Item;
 import org.powerbot.game.api.wrappers.node.SceneObject;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 //Giant Pouch degrade 5515
 //NPC Contact screen = WIDGET 88
@@ -43,16 +49,137 @@ public class PouchHandlers extends Node{
 
     Tile bankTile = new Tile(3182,3438,0);
 
+    public enum Pouch {
+        GIANT(5514, 0xF, 18, 0x3, 8, 12),
+        LARGE(5512, 0xF, 9, 0x3, 4, 9),
+        MEDIUM(5510, 0x7, 3, 0x3, 2, 6),
+        SMALL(5509, 0x3, 0, 0x3, 0, 3);
+
+        private final int id, mask, shift, mask2, shift2, maxEss;
+
+        Pouch(final int id, final int mask, final int shift, final int mask2, final int shift2, final int maxEss) {
+            this.id = id;
+            this.mask = mask;
+            this.shift = shift;
+            this.mask2 = mask2;
+            this.shift2 = shift2;
+            this.maxEss = maxEss;
+        }
+
+        public int getId() {
+            return this.id;
+        }
+
+        public Item getItem() {
+            return Inventory.getItem(this.id);
+        }
+
+        public int getEssCount() {
+            return Settings.get(486, this.shift, this.mask);
+        }
+
+        public int getMaxEss() {
+            return this.maxEss;
+        }
+
+        public boolean isEmpty() {
+            return Settings.get(720, this.shift2, this.mask2) == 0;
+        }
+
+        public boolean isFull() {
+            return getEssCount() == this.maxEss;
+        }
+    }
+
+    public static boolean fillPouch(final int pouchNum) {
+        Pouch pouch = Pouch.GIANT;
+
+        if(pouchNum==Globals.ID_GIANT_POUCH){pouch = Pouch.GIANT;}
+        if(pouchNum==Globals.ID_LARGE_POUCH){pouch = Pouch.LARGE;}
+        if(pouchNum==Globals.ID_MEDIUM_POUCH){pouch = Pouch.MEDIUM;}
+        if(pouchNum==Globals.ID_SMALL_POUCH){pouch = Pouch.SMALL;}
+
+        final Item item = pouch.getItem();
+        if (item != null) {
+            MistRuneCrafter.status="Filling " + item.getName();
+            return item.getWidgetChild().interact("Fill", item.getName());
+        }
+        return false;
+    }
+
+    public static boolean emptyPouch(final int pouchNum) {
+        Pouch pouch = Pouch.GIANT;
+
+        if(pouchNum==Globals.ID_GIANT_POUCH){pouch = Pouch.GIANT;}
+        if(pouchNum==Globals.ID_LARGE_POUCH){pouch = Pouch.LARGE;}
+        if(pouchNum==Globals.ID_MEDIUM_POUCH){pouch = Pouch.MEDIUM;}
+        if(pouchNum==Globals.ID_SMALL_POUCH){pouch = Pouch.SMALL;}
+
+        final Item item = pouch.getItem();
+
+        if (item != null) {
+            MistRuneCrafter.status="Emptying " + item.getName();
+            return item.getWidgetChild().interact("Empty", item.getName());
+        }
+        return false;
+    }
+
+    public static Pouch[] getPouches() {
+        Set<Pouch> used = new LinkedHashSet<Pouch>();
+        for (Pouch p : Pouch.values()) {
+            if (Inventory.contains(p.getId())) {
+                used.add(p);
+            }
+        }
+        return used.toArray(new Pouch[used.size()]);
+    }
+
+    public static boolean allFull() {
+        for (Pouch p : getPouches()) {
+            if (p.isFull()) {
+                MistRuneCrafter.status="All Pouches are FULL.";
+                Task.sleep(2000,3000);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean allEmpty() {
+        for (Pouch p : getPouches()) {
+            if (!p.isEmpty()) {
+                MistRuneCrafter.status="All Pouches are EMPTY.";
+                Task.sleep(2000,3000);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static Item getDegradedPouch() {
+        return Inventory.getItem(5515);
+    }
+
+    public static boolean haveDegraded() {
+        return getDegradedPouch() != null;
+    }
+
+
+    private void waitGameTick(){
+        Task.sleep(1200,1600);
+    }
+
     @Override
     public boolean activate(){
-        return (false);
+        return (haveDegraded());
     }
 
     @Override
     public void execute(){
         SceneObject bankBooth = SceneEntities.getNearest(Globals.BANK_BOOTH_IDS);
 
-        if(!Bank.isOpen()){
+        if(!Bank.isOpen() && !Widgets.get(88,0).visible() && !Widgets.get(1191,17).visible()
+                && !Widgets.get(1184,13).visible() ){
             MistRuneCrafter.status = "Opening bank booth.";
             int x = 0;
             do{
@@ -66,7 +193,8 @@ public class PouchHandlers extends Node{
 
         }
 
-        if(Bank.isOpen()){
+        if(Bank.isOpen() && !Widgets.get(88,0).visible() && !Widgets.get(1191,17).visible()
+                && !Widgets.get(1184,13).visible()){
             MistRuneCrafter.status = "Depositing inventory.";
             Bank.depositInventory();
             MistRuneCrafter.status = "Withdrawing Astral Rune.";
@@ -114,54 +242,113 @@ public class PouchHandlers extends Node{
 //Child 18, Click
 //WIDGET 1184, Child 13, "<p=2>A simple"
 //Child 18, Click
-        Keyboard.sendText("-", false);
-        int x = 0;
+        Timer timeCheck2 = new Timer(10000);
         do{
-            x++;
+            Task.sleep(20);
+        }while(timeCheck2.isRunning() && !Widgets.get(640,108).visible());
+        if(!Widgets.get(640,108).visible()){
+            Widgets.get(540,3).click(true);
+            Task.sleep(650,1000);
+        }
+        Widgets.get(640,108).click(true);
+
+
+        Timer timeCheck = new Timer(30000);
+
+        do{
             Task.sleep(75,125);
-        }while(!Widgets.get(88,0).visible() && x<=100);
-        if(Widgets.get(88,6).getChild(14).getText().startsWith("Dark")){
-            for(int y =0; y<6; y++){
-                Widgets.get(88,7).getChild(5).click(true);
-                Task.sleep(250,500);
+            MistRuneCrafter.status="Waiting for Choose NPC.";
+        }while(!Widgets.get(88,0).visible() && timeCheck.isRunning());
+
+        do{
+        if(Widgets.get(88,6) != null){
+            if(Widgets.get(88,6).getChild(14).getText().startsWith("Dark")){
+                for(int y =0; y<6; y++){
+                    MistRuneCrafter.status="Scrolling down.";
+                    if(Widgets.get(88,7) != null){
+                        Widgets.get(88,7).getChild(5).click(true);
+                        Task.sleep(250,500);
+                    }
+                }
+                Widgets.get(88,6).getChild(14).click(true);
             }
-            Widgets.get(88,6).click(true);
+            MistRuneCrafter.status="Waiting for Cast";
+            Task.sleep(6000,8000);
         }
-        if(Widgets.get(1191,17).getText().substring(4).startsWith("Hello")){
-            Widgets.get(1191,18).click(true);
-            Task.sleep(600,750);
+            waitGameTick();
+
+        if(Widgets.get(1191,17) != null){
+            if(Widgets.get(1191,17).getText().substring(5).startsWith("Hello")){
+                MistRuneCrafter.status="Clicking Continue on Hello";
+                Widgets.get(1191,18).click(true);
+                Task.sleep(600,750);
+            }
         }
-        if(Widgets.get(1184,13).getText().substring(4).startsWith("What")){
-            Widgets.get(1191,18).click(true);
-            Task.sleep(600,750);
+            waitGameTick();
+        if(Widgets.get(1184,13) != null){
+            if(Widgets.get(1184,13).getText().substring(5).startsWith("What")){
+                MistRuneCrafter.status="Clicking Continue on What";
+                Widgets.get(1184,18).click(true);
+                Task.sleep(600,750);
+            }
         }
-        if(Widgets.get(1191,17).getText().substring(4).startsWith("It")){
-            Widgets.get(1191,18).click(true);
-            Task.sleep(600,750);
+            waitGameTick();
+        if(Widgets.get(1191,17) != null){
+            if(Widgets.get(1191,17).getText().substring(5).startsWith("It")){
+                MistRuneCrafter.status="Clicking Continue on It";
+                Widgets.get(1191,18).click(true);
+                Task.sleep(600,750);
+            }
         }
-        if(Widgets.get(1184,13).getText().substring(4).startsWith("Are")){
-            Widgets.get(1191,18).click(true);
-            Task.sleep(600,750);
+            waitGameTick();
+        if(Widgets.get(1184,13) != null){
+             if(Widgets.get(1184,13).getText().substring(5).startsWith("Are")){
+                MistRuneCrafter.status="Clicking Continue on Are";
+                Widgets.get(1184,18).click(true);
+                Task.sleep(600,750);
+            }
         }
-        if(Widgets.get(1191,17).getText().substring(0).startsWith("Sorry")){
-            Widgets.get(1191,18).click(true);
-            Task.sleep(600,750);
+            waitGameTick();
+        if(Widgets.get(1191,17) != null){
+            if(Widgets.get(1191,17).getText().substring(5).startsWith("Sorry")){
+                MistRuneCrafter.status="Clicking Continue on Sorry";
+                Widgets.get(1191,18).click(true);
+                Task.sleep(600,750);
+            }
         }
-        if(Widgets.get(1184,13).getText().substring(4).startsWith("What?")){
-            Widgets.get(1191,18).click(true);
-            Task.sleep(600,750);
+            waitGameTick();
+        if(Widgets.get(1184,13) != null){
+            if(Widgets.get(1184,13).getText().substring(5).startsWith("What?")){
+                MistRuneCrafter.status="Clicking Continue on What?";
+                Widgets.get(1184,18).click(true);
+                Task.sleep(600,750);
+            }
         }
-        if(Widgets.get(1188,24).getText().substring(4).startsWith("Can you repair")){
-            Widgets.get(1188,24).click(true);
-            Task.sleep(600,750);
+            waitGameTick();
+        if(Widgets.get(1188,24) != null){
+            if(Widgets.get(1188,24).getText().startsWith("Can you repair")){
+                MistRuneCrafter.status="Clicking Repair";
+                Widgets.get(1188,24).click(true);
+                Task.sleep(600,750);
+            }
         }
-        if(Widgets.get(1191,17).getText().substring(0).startsWith("Cam you")){
-            Widgets.get(1191,18).click(true);
-            Task.sleep(600,750);
+            waitGameTick();
+        if(Widgets.get(1191,17) != null){
+            if(Widgets.get(1191,17).getText().substring(5).startsWith("Can you")){
+                MistRuneCrafter.status="Clicking Continue on Can you";
+                Widgets.get(1191,18).click(true);
+                Task.sleep(600,750);
+            }
         }
-        if(Widgets.get(1184,13).getText().substring(4).startsWith("A simple")){
-            Widgets.get(1191,18).click(true);
-            Task.sleep(600,750);
+            waitGameTick();
+        if(Widgets.get(1184,13) != null){
+            if(Widgets.get(1184,13).getText().substring(5).startsWith("A simple")){
+                MistRuneCrafter.status="Clicking Continue on A simple";
+                Widgets.get(1184,18).click(true);
+                Task.sleep(600,750);
+            }
         }
+            waitGameTick();
+        }while(PouchHandlers.haveDegraded());
     }
 }
