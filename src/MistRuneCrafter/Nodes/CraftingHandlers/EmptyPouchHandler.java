@@ -19,17 +19,19 @@ import java.util.Set;
 public class EmptyPouchHandler extends Node {
 
     private void sleepGameTick(){
-        Task.sleep(650,850);
+        Task.sleep(350,450);
     }
 
     @Override
     public boolean activate(){
-        return(Inventory.contains(Globals.ITEMS_OPTIONAL) && !Inventory.isFull() && !PouchHandlers.allEmpty());
+        System.out.println("Starting pouch Dropper.");
+        return(Inventory.contains(Globals.ITEMS_OPTIONAL) && Inventory.getCount()<=18 && !PouchHandlers.allEmpty());
     }
 
     @Override
     public void execute(){
        int pouchNum;
+        System.out.println("Executing pouch Dropper.");
        PouchHandlers.Pouch pouch = PouchHandlers.Pouch.GIANT;
 
             for(int x =0;  x<= Globals.ITEMS_OPTIONAL.length-1; x++){
@@ -40,11 +42,13 @@ public class EmptyPouchHandler extends Node {
                 if(pouchNum==Globals.ID_MEDIUM_POUCH){pouch = PouchHandlers.Pouch.MEDIUM;}
                 if(pouchNum==Globals.ID_SMALL_POUCH){pouch = PouchHandlers.Pouch.SMALL;}
 
-                if(Inventory.getCount()<=20){
+                if(Inventory.getCount()<=18){
                     MistRuneCrafter.status="Emptying Pouch: " + Globals.ITEMS_OPTIONAL[x];
                     System.out.println(pouch.getId() + " is being emptied.");
-                    PouchHandlers.emptyPouch(Globals.ITEMS_OPTIONAL[x]);
-                    sleepGameTick();
+                    if(!pouch.isEmpty()){
+                        PouchHandlers.emptyPouch(Globals.ITEMS_OPTIONAL[x]);
+                        sleepGameTick();
+                    }
                 }
             }
 

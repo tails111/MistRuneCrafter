@@ -48,19 +48,17 @@ import java.util.Set;
 public class PouchHandlers extends Node{
 
     public enum Pouch {
-        GIANT(5514, 0xF, 18, 0x3, 8, 12),
-        LARGE(5512, 0xF, 9, 0x3, 4, 9),
-        MEDIUM(5510, 0x8, 3, 0x3, 3, 6),
-        SMALL(5509, 0x3, 0, 0x3, 0, 3);
+        GIANT(5514, 0xF, 18, 12), //30
+        LARGE(5512, 0xF, 9, 9),  //12
+        MEDIUM(5510, 0xF, 3, 6),
+        SMALL(5509, 0xF, 0, 3);
 
-        private final int id, mask, shift, mask2, shift2, maxEss;
+        private final int id, mask, shift, maxEss;
 
-        Pouch(final int id, final int mask, final int shift, final int mask2, final int shift2, final int maxEss) {
+        Pouch(final int id, final int mask, final int shift, final int maxEss) {
             this.id = id;
             this.mask = mask;
             this.shift = shift;
-            this.mask2 = mask2;
-            this.shift2 = shift2;
             this.maxEss = maxEss;
         }
 
@@ -73,9 +71,7 @@ public class PouchHandlers extends Node{
         }
 
         public int getEssCount() {
-          System.out.println(Settings.get(486, this.shift, this.mask));
-            System.out.println(Settings.get(3215, this.shift, this.mask));
-            return (Settings.get(486, this.shift, this.mask));
+            return (Settings.get(3214, this.shift, this.mask));
         }
 
         public int getMaxEss() {
@@ -84,12 +80,11 @@ public class PouchHandlers extends Node{
 
         public boolean isEmpty() {
             //   return
-            if(Settings.get(720, this.shift2, this.mask2) == 0){
-                System.out.println(this.getId() + " is Empty Returns false");
-                System.out.println(Settings.get(720, this.shift2, this.mask2));
+            if(getEssCount() != this.maxEss){
+                System.out.println(this.getId() + " is Empty Returns true and has " +getEssCount() + " ess.");
                 return true;
             }
-            System.out.println(this.getId() + " is Empty Returns true");
+            System.out.println(this.getId() + " is Empty Returns false and has " +getEssCount() + " ess.");
             return false;
         }
 
@@ -151,8 +146,8 @@ public class PouchHandlers extends Node{
         for (Pouch p : getPouches()) {
             System.out.println(p.getId() + " being tested.");
             if (!p.isEmpty()) {
-                MistRuneCrafter.status="All Empty Return false.";
-                System.out.println(p.getId() + " All Empty Returns false");
+                MistRuneCrafter.status="All Empty Return false and has " + p.getEssCount() + " ess.";
+                System.out.println(p.getId() + " All Empty Returns false and has " + p.getEssCount() + " ess.");
                 return false;
             }
         }
@@ -165,8 +160,8 @@ public class PouchHandlers extends Node{
     public static boolean allFull() {
         for (Pouch p : getPouches()) {
             if (!p.isFull()) {
-                MistRuneCrafter.status="All Full return false.";
-                System.out.println(p.getId() + " All Full Returns false");
+                MistRuneCrafter.status="All Full return false and has " + p.getEssCount() + " ess.";
+                System.out.println(p.getId() + " All Full Returns false and has " + p.getEssCount() + " ess.");
                 return false;
             }
         }

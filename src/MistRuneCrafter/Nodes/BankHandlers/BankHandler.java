@@ -109,9 +109,9 @@ public class BankHandler extends Node {
             MistRuneCrafter.status="Filling Pouches through BankHandler";
             PouchHandlers.fillPouch(Globals.ITEMS_OPTIONAL[x]);
             invChangeSleep();
-            if(PouchHandlers.allFull()){ System.out.println("PouchHandlers.allFull{} = true "); return true;}
+            if(PouchHandlers.allFull()){ System.out.println("PouchHandlers.allFull{} = false "); return false;}
         }
-        return false;
+        return true;
     }
 
     PouchHandlers pouchControl = new PouchHandlers();
@@ -206,7 +206,7 @@ public class BankHandler extends Node {
                 pouchControl.execute();
             }
 
-            Timer timeCheck2 = new Timer(6000);
+            Timer timeCheck2 = new Timer(25000);
             while (timeCheck2.isRunning() && !PouchHandlers.allFull()){
                 fillPouches();
                 if(Inventory.getCount()<=12){Bank.withdraw(Globals.ID_PURE_ESS, 28-Inventory.getCount()); invChangeSleep();}
