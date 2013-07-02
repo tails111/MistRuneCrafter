@@ -64,7 +64,9 @@ public class CraftingHandler extends Node {
                 castImbue.execute();
             }
             if(Settings.get(4)>1282 && Inventory.contains(Globals.ID_PURE_ESS)){
-                Camera.turnTo(runeCraftAltar);
+                if(!runeCraftAltar.isOnScreen()){
+                    Camera.turnTo(runeCraftAltar);
+                }
                 MistRuneCrafter.status="Crafting Mist Runes.";
                 MistRuneCrafter.interacting = Inventory.getItem(Globals.ID_RUNE_WATER).getWidgetChild();
                 Inventory.getItem(Globals.ID_RUNE_WATER).getWidgetChild().interact("Use");
@@ -73,7 +75,8 @@ public class CraftingHandler extends Node {
                 BankHandler.invChangeSleep();
             }
             emptyPouches.execute();
-        }while(Settings.get(4)>=1282 && timeCheck.isRunning() && Inventory.contains(Globals.ID_PURE_ESS) && PouchHandlers.allEmpty());
+            sleepGameTick();
+        }while(Settings.get(4)>=1282 && timeCheck.isRunning() && Inventory.contains(Globals.ID_PURE_ESS));
 
         sleepGameTick();
         MistRuneCrafter.postedProfit= MistRuneCrafter.postedProfit + (Inventory.getItem(Globals.ID_RUNE_MIST).getStackSize()*Globals.RUNE_MIST_PRICE);

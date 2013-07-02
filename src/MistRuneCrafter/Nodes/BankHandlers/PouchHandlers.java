@@ -84,24 +84,24 @@ public class PouchHandlers extends Node{
          //   return
           if(Settings.get(720, this.shift2, this.mask2) == 0){
                 System.out.println(this.getId() + " is Empty Returns true");
-                return false;
+                return true;
             }
             System.out.println(this.getId() + " is Empty Returns false");
-            return true;
+            return false;
         }
 
         public boolean isFull() {
           //  return
            if(getEssCount() == this.maxEss){
                System.out.println(this.getId() + " is Full Returns true");
-               return false;
+               return true;
            }
             System.out.println(this.getId() + " is Full Returns false");
-            return true;
+            return false;
            }
     }
 
-    public static boolean fillPouch(final int pouchNum) {
+    public static boolean fillPouch(int pouchNum) {
         Pouch pouch = Pouch.GIANT;
 
         if(pouchNum==Globals.ID_GIANT_POUCH){pouch = Pouch.GIANT;}
@@ -117,7 +117,7 @@ public class PouchHandlers extends Node{
         return false;
     }
 
-    public static boolean emptyPouch(final int pouchNum) {
+    public static boolean emptyPouch(int pouchNum) {
         Pouch pouch = Pouch.GIANT;
 
         if(pouchNum==Globals.ID_GIANT_POUCH){pouch = Pouch.GIANT;}
@@ -148,14 +148,14 @@ public class PouchHandlers extends Node{
         for (Pouch p : getPouches()) {
             System.out.println(p.getId() + " being tested.");
             if (!p.isEmpty()) {
-                MistRuneCrafter.status="All Empty Return true.";
-                System.out.println(p.getId() + " All Empty Returns true");
-                return true;
+                MistRuneCrafter.status="All Empty Return false.";
+                System.out.println(p.getId() + " All Empty Returns false");
+                return false;
             }
         }
-        System.out.println("All Empty Returns false");
-        MistRuneCrafter.status="All Empty Return false.";
-        return false;
+        System.out.println("All Empty Returns true");
+        MistRuneCrafter.status="All Empty Return true.";
+        return true;
 
     }
 
@@ -168,7 +168,7 @@ public class PouchHandlers extends Node{
             }
         }
         MistRuneCrafter.status="All Full return true.";
-        System.out.println("All Full Returns True");
+        System.out.println("All Full Returns true");
         return true;
 
     }

@@ -101,26 +101,16 @@ public class BankHandler extends Node {
     }
 
     public boolean fillPouches(){
-
-        do {
-            List<Integer> used = new ArrayList<Integer>();
             for(int x =0;  x<=Globals.ITEMS_OPTIONAL.length-1; x++){
-                if(Inventory.getCount(Globals.ID_PURE_ESS)<=16){
+                if(Inventory.getCount(Globals.ID_PURE_ESS)<=11){
                     Bank.withdraw(Globals.ID_PURE_ESS, 28-Inventory.getCount());
                     invChangeSleep();
                 }
-
-                if(!PouchHandlers.allEmpty()){return true;}
                 MistRuneCrafter.status="Filling Pouches through BankHandler";
-                if(!used.contains(Globals.ITEMS_OPTIONAL[x])){
-                    used.add(Globals.ITEMS_OPTIONAL[x]);
-                    PouchHandlers.fillPouch(Globals.ITEMS_OPTIONAL[x]);
-                    invChangeSleep();
-                }
-
+                PouchHandlers.fillPouch(Globals.ITEMS_OPTIONAL[x]);
+                invChangeSleep();
+                if(PouchHandlers.allFull()){ System.out.println("PouchHandlers.allFull{} = true "); return true;}
             }
-        }while(!PouchHandlers.allFull());
-
         return false;
     }
 
@@ -216,11 +206,12 @@ public class BankHandler extends Node {
                 pouchControl.execute();
             }
 
-            Timer timeCheck2 = new Timer(15000);
-            while (!fillPouches() && timeCheck2.isRunning()){
+            Timer timeCheck2 = new Timer(6000);
+            while (timeCheck2.isRunning() && !PouchHandlers.allFull()){
                 fillPouches();
             if(Inventory.getCount()<=12){Bank.withdraw(Globals.ID_PURE_ESS, 28-Inventory.getCount()); invChangeSleep();}
             }
+            if(!Inventory.isFull()){Bank.withdraw(Globals.ID_PURE_ESS, 28-Inventory.getCount()); invChangeSleep();}
         }
 
         MistRuneCrafter.status = "Closing bank.";

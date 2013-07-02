@@ -34,7 +34,6 @@ public class EmptyPouchHandler extends Node {
        PouchHandlers.Pouch pouch = PouchHandlers.Pouch.GIANT;
 
             for(int x =0;  x<= Globals.ITEMS_OPTIONAL.length-1; x++){
-                List<Integer> used = new ArrayList<Integer>();
                 pouchNum = Globals.ITEMS_OPTIONAL[x];
                 MistRuneCrafter.status= "Emptying pouches.";
                 if(pouchNum==Globals.ID_GIANT_POUCH){pouch = PouchHandlers.Pouch.GIANT;}
@@ -42,13 +41,10 @@ public class EmptyPouchHandler extends Node {
                 if(pouchNum==Globals.ID_MEDIUM_POUCH){pouch = PouchHandlers.Pouch.MEDIUM;}
                 if(pouchNum==Globals.ID_SMALL_POUCH){pouch = PouchHandlers.Pouch.SMALL;}
 
-                if(pouch.isFull() && Inventory.getCount()<=20){
+                if(Inventory.getCount()<=20){
                     MistRuneCrafter.status="Emptying Pouch: " + Globals.ITEMS_OPTIONAL[x];
                     System.out.println(pouch.getId() + " is being emptied.");
-                    if(!used.contains(pouch.getId())){
-                        PouchHandlers.emptyPouch(Globals.ITEMS_OPTIONAL[x]);
-                        used.add(Globals.ITEMS_OPTIONAL[x]);
-                    }
+                    PouchHandlers.emptyPouch(Globals.ITEMS_OPTIONAL[x]);
                     sleepGameTick();
                 }
             }
