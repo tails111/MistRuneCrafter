@@ -46,7 +46,7 @@ public class CraftingHandler extends Node {
     @Override
     public boolean activate(){
         SceneObject runeCraftAltar = SceneEntities.getNearest(AIR_ALTAR);
-        return (runeCraftAltar != null && Inventory.containsAll(Globals.ID_PURE_ESS, Globals.ID_RUNE_WATER) && PouchHandlers.allFull());
+        return (runeCraftAltar != null && Inventory.containsAll(Globals.ID_PURE_ESS, Globals.ID_RUNE_WATER) && PouchHandlers.Pouch.allFull());
     }
 
     @Override
@@ -76,14 +76,15 @@ public class CraftingHandler extends Node {
             }
             if(emptyPouches.activate()){emptyPouches.execute();}
             sleepGameTick();
-        }while(Settings.get(4)>=1282 && timeCheck.isRunning() && Inventory.contains(Globals.ID_PURE_ESS));
+        }while(Settings.get(4)>1282 && timeCheck.isRunning() && Inventory.contains(Globals.ID_PURE_ESS));
 
         do{
             if(emptyPouches.activate()){emptyPouches.execute();}
             sleepGameTick();
             finishCrafting(runeCraftAltar);
-        }while(emptyPouches.activate() && Inventory.contains(Globals.ID_PURE_ESS) && !Inventory.contains(Globals.ID_RUNE_ASTRAL));
+        }while(Inventory.contains(Globals.ID_PURE_ESS) && !Inventory.contains(Globals.ID_RUNE_ASTRAL));
 
+        sleepGameTick();
         MistRuneCrafter.postedProfit= MistRuneCrafter.postedProfit + (Inventory.getItem(Globals.ID_RUNE_MIST).getStackSize()*Globals.RUNE_MIST_PRICE);
         MistRuneCrafter.postedCrafts= MistRuneCrafter.postedCrafts + Inventory.getItem(Globals.ID_RUNE_MIST).getStackSize();
     }

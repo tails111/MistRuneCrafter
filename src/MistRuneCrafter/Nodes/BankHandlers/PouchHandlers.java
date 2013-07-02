@@ -79,25 +79,12 @@ public class PouchHandlers extends Node{
         }
 
         public boolean isEmpty() {
-            //   return
-            if(getEssCount() != this.maxEss){
-                System.out.println(this.getId() + " is Empty Returns true and has " +getEssCount() + " ess.");
-                return true;
-            }
-            System.out.println(this.getId() + " is Empty Returns false and has " +getEssCount() + " ess.");
-            return false;
+            return(getEssCount() != this.maxEss);
         }
 
         public boolean isFull() {
-            //  return
-            if(getEssCount() == this.maxEss){
-                System.out.println(this.getId() + " is Full Returns true and has " + getEssCount() + " ess.");
-                return true;
-            }
-            System.out.println(this.getId() + " is Full Returns false and has " + getEssCount() + " ess.");
-            return false;
+            return(getEssCount() == this.maxEss);
         }
-    }
 
     public static boolean fillPouch(int pouchNum) {
         Pouch pouch = Pouch.GIANT;
@@ -108,7 +95,7 @@ public class PouchHandlers extends Node{
         if(pouchNum==Globals.ID_SMALL_POUCH){pouch = Pouch.SMALL;}
 
         final Item item = pouch.getItem();
-        if (item != null && !pouch.isFull()) {
+        if (item != null) {
             MistRuneCrafter.status="Filling " + item.getName();
             return item.getWidgetChild().interact("Fill", item.getName());
         }
@@ -127,6 +114,7 @@ public class PouchHandlers extends Node{
 
         if (item != null) {
             MistRuneCrafter.status="Emptying " + item.getName();
+            System.out.println(item.getName() + " is attempting to be emptied.");
             return item.getWidgetChild().interact("Empty", item.getName());
         }
         return false;
@@ -144,14 +132,11 @@ public class PouchHandlers extends Node{
 
     public static boolean allEmpty() {
         for (Pouch p : getPouches()) {
-            System.out.println(p.getId() + " being tested.");
             if (!p.isEmpty()) {
                 MistRuneCrafter.status="All Empty Return false and has " + p.getEssCount() + " ess.";
-                System.out.println(p.getId() + " All Empty Returns false and has " + p.getEssCount() + " ess.");
                 return false;
             }
         }
-        System.out.println("All Empty Returns true");
         MistRuneCrafter.status="All Empty Return true.";
         return true;
 
@@ -160,13 +145,11 @@ public class PouchHandlers extends Node{
     public static boolean allFull() {
         for (Pouch p : getPouches()) {
             if (!p.isFull()) {
-                MistRuneCrafter.status="All Full return false and has " + p.getEssCount() + " ess.";
-                System.out.println(p.getId() + " All Full Returns false and has " + p.getEssCount() + " ess.");
+                MistRuneCrafter.status="All Full return false and has " + p.getEssCount() + " ess.";;
                 return false;
             }
         }
         MistRuneCrafter.status="All Full return true.";
-        System.out.println("All Full Returns true");
         return true;
 
     }
@@ -179,14 +162,16 @@ public class PouchHandlers extends Node{
         return getDegradedPouch() != null;
     }
 
+    }
 
     private void waitGameTick(){
         Task.sleep(1200,1600);
     }
 
+
     @Override
     public boolean activate(){
-        return (haveDegraded());
+        return (PouchHandlers.Pouch.haveDegraded());
     }
 
     @Override
@@ -226,7 +211,7 @@ public class PouchHandlers extends Node{
                 if(Bank.withdraw(Globals.ITEMS_OPTIONAL[x], Globals.ITEMS_OPTIONAL_AMOUNTS[x])){
                     BankHandler.invChangeSleep();
                 }
-            };
+            }
             int x = 0;
             do{
                 Bank.close();
@@ -365,6 +350,6 @@ public class PouchHandlers extends Node{
                 }
             }
             waitGameTick();
-        }while(PouchHandlers.haveDegraded());
+        }while(PouchHandlers.Pouch.haveDegraded());
     }
 }

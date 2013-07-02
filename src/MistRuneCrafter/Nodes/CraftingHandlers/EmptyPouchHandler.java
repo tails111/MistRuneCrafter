@@ -25,16 +25,16 @@ public class EmptyPouchHandler extends Node {
     @Override
     public boolean activate(){
         System.out.println("Starting pouch Dropper.");
-        return(Inventory.contains(Globals.ITEMS_OPTIONAL) && !Inventory.isFull() && !PouchHandlers.allEmpty());
+        return(Inventory.contains(Globals.ITEMS_OPTIONAL) && !Inventory.isFull());
     }
 
     @Override
     public void execute(){
        int pouchNum;
-        System.out.println("Executing pouch Dropper.");
+       System.out.println("Executing pouch Dropper.");
        PouchHandlers.Pouch pouch = PouchHandlers.Pouch.GIANT;
 
-            for(int x =0;  x<= Globals.ITEMS_OPTIONAL.length-2; x++){
+            for(int x =0;  x<= Globals.ITEMS_OPTIONAL.length-1; x++){
                 pouchNum = Globals.ITEMS_OPTIONAL[x];
                 MistRuneCrafter.status= "Emptying pouches.";
                 if(pouchNum==Globals.ID_GIANT_POUCH){pouch = PouchHandlers.Pouch.GIANT;}
@@ -42,15 +42,12 @@ public class EmptyPouchHandler extends Node {
                 if(pouchNum==Globals.ID_MEDIUM_POUCH){pouch = PouchHandlers.Pouch.MEDIUM;}
                 if(pouchNum==Globals.ID_SMALL_POUCH){pouch = PouchHandlers.Pouch.SMALL;}
 
-                if(pouch.isEmpty()){x++;}
-
                 if(!pouch.isEmpty()){
                     MistRuneCrafter.status="Emptying Pouch: " + Globals.ITEMS_OPTIONAL[x];
                     System.out.println(pouch.getId() + " is being emptied.");
-                    PouchHandlers.emptyPouch(Globals.ITEMS_OPTIONAL[x]);
+                    PouchHandlers.Pouch.emptyPouch(Globals.ITEMS_OPTIONAL[x]);
                     BankHandler.invChangeSleep();
                 }
             }
-
     }
 }

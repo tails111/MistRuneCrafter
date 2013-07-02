@@ -11,6 +11,7 @@ import org.powerbot.game.api.methods.Walking;
 import org.powerbot.game.api.methods.node.SceneEntities;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Camera;
+import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.node.SceneObject;
 
@@ -26,7 +27,7 @@ public class WalkToBank extends Node {
     @Override
     public boolean activate(){
         return (Inventory.contains(4695) && !Inventory.contains(Globals.ID_PURE_ESS)
-                && Calculations.distanceTo(bankTile)>=7 && PouchHandlers.allEmpty());
+                && Calculations.distanceTo(bankTile)>=7 && !PouchHandlers.Pouch.allFull());
     }
 
     @Override
@@ -38,11 +39,10 @@ public class WalkToBank extends Node {
                 Camera.turnTo(ruinExit);
                 MistRuneCrafter.status="Clicking portal";
                 ruinExit.interact("Enter");
-                int x = 0;
+                Timer timeCheck = new Timer(3000);
                 do{
                     Task.sleep(20, 45);
-                    x++;
-                }while(Calculations.distanceTo(altarExit)<=8 && x<=500);
+                }while(Calculations.distanceTo(altarExit)<=8 && timeCheck.isRunning());
             }
         }
         MistRuneCrafter.status="Walking to bank.";
