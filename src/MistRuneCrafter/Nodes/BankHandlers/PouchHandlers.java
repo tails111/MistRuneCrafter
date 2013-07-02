@@ -47,12 +47,10 @@ import java.util.Set;
 
 public class PouchHandlers extends Node{
 
-    Tile bankTile = new Tile(3182,3438,0);
-
     public enum Pouch {
         GIANT(5514, 0xF, 18, 0x3, 8, 12),
         LARGE(5512, 0xF, 9, 0x3, 4, 9),
-        MEDIUM(5510, 0x7, 3, 0x3, 2, 6),
+        MEDIUM(5510, 0x8, 3, 0x3, 3, 6),
         SMALL(5509, 0x3, 0, 0x3, 0, 3);
 
         private final int id, mask, shift, mask2, shift2, maxEss;
@@ -83,12 +81,24 @@ public class PouchHandlers extends Node{
         }
 
         public boolean isEmpty() {
-            return Settings.get(720, this.shift2, this.mask2) == 0;
+         //   return
+          if(Settings.get(720, this.shift2, this.mask2) == 0){
+                System.out.println(this.getId() + " is Empty Returns true");
+                return false;
+            }
+            System.out.println(this.getId() + " is Empty Returns false");
+            return true;
         }
 
         public boolean isFull() {
-            return getEssCount() == this.maxEss;
-        }
+          //  return
+           if(getEssCount() == this.maxEss){
+               System.out.println(this.getId() + " is Full Returns true");
+               return false;
+           }
+            System.out.println(this.getId() + " is Full Returns false");
+            return true;
+           }
     }
 
     public static boolean fillPouch(final int pouchNum) {
@@ -134,26 +144,33 @@ public class PouchHandlers extends Node{
         return used.toArray(new Pouch[used.size()]);
     }
 
-    public static boolean allFull() {
-        for (Pouch p : getPouches()) {
-            if (p.isFull()) {
-                MistRuneCrafter.status="All Pouches are FULL.";
-                Task.sleep(2000,3000);
-                return false;
-            }
-        }
-        return true;
-    }
-
     public static boolean allEmpty() {
         for (Pouch p : getPouches()) {
+            System.out.println(p.getId() + " being tested.");
             if (!p.isEmpty()) {
-                MistRuneCrafter.status="All Pouches are EMPTY.";
-                Task.sleep(2000,3000);
+                MistRuneCrafter.status="All Empty Return true.";
+                System.out.println(p.getId() + " All Empty Returns true");
+                return true;
+            }
+        }
+        System.out.println("All Empty Returns false");
+        MistRuneCrafter.status="All Empty Return false.";
+        return false;
+
+    }
+
+    public static boolean allFull() {
+        for (Pouch p : getPouches()) {
+            if (!p.isFull()) {
+                MistRuneCrafter.status="All Full return false.";
+                System.out.println(p.getId() + " All Full Returns false");
                 return false;
             }
         }
+        MistRuneCrafter.status="All Full return true.";
+        System.out.println("All Full Returns True");
         return true;
+
     }
 
     public static Item getDegradedPouch() {

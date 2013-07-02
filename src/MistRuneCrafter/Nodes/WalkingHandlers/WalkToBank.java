@@ -15,13 +15,13 @@ import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.node.SceneObject;
 
 public class WalkToBank extends Node {
-    Tile[] toBank = new Tile[] {
+    private final Tile[] toBank = new Tile[] {
             new Tile(3129,3405,0), new Tile(3136, 3408, 0), new Tile(3142, 3413, 0), new Tile(3151, 3416, 0),
             new Tile(3160,3419,0), new Tile(3167,3424,0), new Tile(3178,3429,0), new Tile(3185,3433,0)};
 
     private final int AIR_EXIT = 2465;
-    Tile altarExit = new Tile(2841,4829,0);
-    Tile bankTile = new Tile(3186,3438,0);
+    private final Tile altarExit = new Tile(2841,4829,0);
+    private final Tile bankTile = new Tile(3186,3438,0);
 
     @Override
     public boolean activate(){
@@ -31,8 +31,8 @@ public class WalkToBank extends Node {
 
     @Override
     public void execute(){
+        SceneObject ruinExit = SceneEntities.getNearest(AIR_EXIT);
         if(Calculations.distanceTo(altarExit)<=8){
-            SceneObject ruinExit = SceneEntities.getNearest(AIR_EXIT);
             if(ruinExit != null){
                 MistRuneCrafter.interacting=ruinExit;
                 Camera.turnTo(ruinExit);
@@ -45,6 +45,7 @@ public class WalkToBank extends Node {
                 }while(Calculations.distanceTo(altarExit)<=8 && x<=500);
             }
         }
+        MistRuneCrafter.status="Walking to bank.";
         Walking.newTilePath(toBank).traverse();
     }
 

@@ -13,7 +13,7 @@ import org.powerbot.game.api.wrappers.Tile;
 
 
 public class ImbueHandler extends Node {
-    Tile altar = new Tile(2843,4832,0);
+    private final Tile altar = new Tile(2843,4832,0);
 
     @Override
     public boolean activate(){
@@ -22,7 +22,7 @@ public class ImbueHandler extends Node {
 
     @Override
     public void execute(){
-        if(Calculations.distanceTo(altar)<=4){
+        if(Calculations.distanceTo(altar)<=5){
             Widgets.get(640,105).click(true);
             Task.sleep(75,125);
         }

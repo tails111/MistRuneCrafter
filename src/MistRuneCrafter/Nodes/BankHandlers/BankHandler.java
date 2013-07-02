@@ -20,6 +20,8 @@ import org.powerbot.game.api.wrappers.node.SceneObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BankHandler extends Node {
     public static int getGEValues(final int id) {
@@ -41,14 +43,7 @@ public class BankHandler extends Node {
         return price;
     }
 
-
-
     private final Tile BANK_TILE = new Tile(3186,3440,0);
-
-    //SETTING 3125 is POUCHES.
-    //Small +- 2, Medium +- 8,  large +- 32, giant +- 128
-    //170 Total
-
 
     public boolean haveRequiredItem(){
         return (Inventory.containsAll(Globals.ITEMS_REQUIRED));
@@ -90,37 +85,40 @@ public class BankHandler extends Node {
         return false;
     }
 
-    public static void invChangeSleep(){
+    public static boolean invChangeSleep(){
 
         Timer timeCheck = new Timer(Random.nextInt(1200,1600));
-        Task.sleep(50,75);
         int tempInvCount = Inventory.getCount();
         int newInvCount;
         do {
-            MistRuneCrafter.status="Waiting for Inv Change.";
+            MistRuneCrafter.status="Waiting for Inv Change: " +timeCheck.getRemaining();
             Task.sleep(20,50);
             newInvCount = Inventory.getCount();
-        }while(tempInvCount!=newInvCount && timeCheck.isRunning());
+            if(timeCheck.getRemaining()<=100){return false;}
+        }while(tempInvCount==newInvCount && timeCheck.isRunning());
+        return true;
 
     }
 
     public boolean fillPouches(){
 
         do {
+            List<Integer> used = new ArrayList<Integer>();
             for(int x =0;  x<=Globals.ITEMS_OPTIONAL.length-1; x++){
-                MistRuneCrafter.status="Filling Pouches through BankHandler";
-                PouchHandlers.fillPouch(Globals.ITEMS_OPTIONAL[x]);
-                invChangeSleep();
-                if(Inventory.getCount(Globals.ID_PURE_ESS)<=9){
+                if(Inventory.getCount(Globals.ID_PURE_ESS)<=16){
                     Bank.withdraw(Globals.ID_PURE_ESS, 28-Inventory.getCount());
                     invChangeSleep();
                 }
-                if(!Inventory.isFull()){
-                    Bank.withdraw(Globals.ID_PURE_ESS,28-Inventory.getCount());
+
+                if(!PouchHandlers.allEmpty()){return true;}
+                MistRuneCrafter.status="Filling Pouches through BankHandler";
+                if(!used.contains(Globals.ITEMS_OPTIONAL[x])){
+                    used.add(Globals.ITEMS_OPTIONAL[x]);
+                    PouchHandlers.fillPouch(Globals.ITEMS_OPTIONAL[x]);
                     invChangeSleep();
                 }
+
             }
-            Task.sleep(1250,1500);
         }while(!PouchHandlers.allFull());
 
         return false;
@@ -209,17 +207,20 @@ public class BankHandler extends Node {
             // }
             for(int x = 0; x<= Globals.ITEMS_OPTIONAL.length-1; x++){
                 MistRuneCrafter.status = "Withdrawing pouches.";
-                Bank.withdraw(Globals.ITEMS_OPTIONAL[x], Globals.ITEMS_OPTIONAL_AMOUNTS[x]);
-                invChangeSleep();
+                if(Bank.withdraw(Globals.ITEMS_OPTIONAL[x], Globals.ITEMS_OPTIONAL_AMOUNTS[x])){
+                    invChangeSleep();
+                }
                 Task.sleep(250,500);
             }
             if(pouchControl.activate()){
                 pouchControl.execute();
             }
 
-            if(!Inventory.isFull()) {Bank.withdraw(Globals.ID_PURE_ESS, 28-Inventory.getCount()); invChangeSleep();}
-            fillPouches();
-            if(!Inventory.isFull()) {Bank.withdraw(Globals.ID_PURE_ESS, 28-Inventory.getCount()); invChangeSleep();}
+            Timer timeCheck2 = new Timer(15000);
+            while (!fillPouches() && timeCheck2.isRunning()){
+                fillPouches();
+            if(Inventory.getCount()<=12){Bank.withdraw(Globals.ID_PURE_ESS, 28-Inventory.getCount()); invChangeSleep();}
+            }
         }
 
         MistRuneCrafter.status = "Closing bank.";

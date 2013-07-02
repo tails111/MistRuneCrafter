@@ -19,16 +19,15 @@ import org.powerbot.game.api.wrappers.node.SceneObject;
 
 public class WalkToAltar  extends Node {
 
-    Tile[] toAltar = new Tile[] {
+    private final Tile[] toAltar = new Tile[] {
             new Tile(3185,3433,0), new Tile(3178, 3429, 0), new Tile(3167, 3424, 0), new Tile(3160, 3419, 0),
             new Tile(3151,3416,0), new Tile(3142,3413,0), new Tile(3136,3408,0), new Tile(3129,3405,0)};
 
-    Tile altarEntrance = new Tile(3129,3405,0);
-    Tile altar = new Tile(2843,4832,0);
+    private final Tile altarEntrance = new Tile(3129,3405,0);
+    private final Tile altar = new Tile(2843,4832,0);
 
     private final int AIR_RUINS = 2452;   //Enter
     private final int AIR_ALTAR = 2478;  // Craft-rune
-
 
     @Override
     public boolean activate(){
@@ -41,15 +40,20 @@ public class WalkToAltar  extends Node {
     public void execute(){
        MistRuneCrafter.status="Walking to Altar.";
        Walking.newTilePath(toAltar).traverse();
+        SceneObject toAltarObj = SceneEntities.getNearest(AIR_RUINS);
+        if(Inventory.contains(Globals.ID_BINDING_NECKLACE)){
+            Inventory.getItem(Globals.ID_BINDING_NECKLACE).getWidgetChild().interact("Wear");
+            BankHandler.invChangeSleep();
+        }
        if(Calculations.distanceTo(altarEntrance)<=4){
-           SceneObject toAltar = SceneEntities.getNearest(AIR_RUINS);
+
            Timer timeCheck = new Timer(Random.nextInt(10000, 15000));
-           if(toAltar != null){
+           if(toAltarObj != null){
                SceneObject runeCraftAltar = SceneEntities.getNearest(AIR_ALTAR);
-               MistRuneCrafter.interacting=toAltar;
-               Camera.turnTo(toAltar);
+               MistRuneCrafter.interacting=toAltarObj;
+               Camera.turnTo(toAltarObj);
                MistRuneCrafter.status="Clicking altar";
-               toAltar.interact("Enter");
+               toAltarObj.interact("Enter");
                 do{
                     Task.sleep(60,85);
                     MistRuneCrafter.status="Waiting to enter altar for: " + (timeCheck.getRemaining()/1000);
