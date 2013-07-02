@@ -24,8 +24,7 @@ public class EmptyPouchHandler extends Node {
 
     @Override
     public boolean activate(){
-       // return(Inventory.contains(Globals.ITEMS_OPTIONAL) && !Inventory.isFull());
-        return(true);
+        return(Inventory.contains(Globals.ITEMS_OPTIONAL) && !Inventory.isFull() && !PouchHandlers.allEmpty());
     }
 
     @Override

@@ -101,16 +101,16 @@ public class BankHandler extends Node {
     }
 
     public boolean fillPouches(){
-            for(int x =0;  x<=Globals.ITEMS_OPTIONAL.length-1; x++){
-                if(Inventory.getCount(Globals.ID_PURE_ESS)<=11){
-                    Bank.withdraw(Globals.ID_PURE_ESS, 28-Inventory.getCount());
-                    invChangeSleep();
-                }
-                MistRuneCrafter.status="Filling Pouches through BankHandler";
-                PouchHandlers.fillPouch(Globals.ITEMS_OPTIONAL[x]);
+        for(int x =0;  x<=Globals.ITEMS_OPTIONAL.length-1; x++){
+            if(Inventory.getCount(Globals.ID_PURE_ESS)<=11){
+                Bank.withdraw(Globals.ID_PURE_ESS, 28-Inventory.getCount());
                 invChangeSleep();
-                if(PouchHandlers.allFull()){ System.out.println("PouchHandlers.allFull{} = true "); return true;}
             }
+            MistRuneCrafter.status="Filling Pouches through BankHandler";
+            PouchHandlers.fillPouch(Globals.ITEMS_OPTIONAL[x]);
+            invChangeSleep();
+            if(PouchHandlers.allFull()){ System.out.println("PouchHandlers.allFull{} = true "); return true;}
+        }
         return false;
     }
 
@@ -165,14 +165,14 @@ public class BankHandler extends Node {
                 Bank.withdraw(Globals.ITEMS_REQUIRED[x],Globals.ITEMS_REQUIRED_AMOUNTS[x]);
                 invChangeSleep();
             }
-               if(needNecklace){
-                   Bank.withdraw(Globals.ID_BINDING_NECKLACE, 1);
-                   invChangeSleep();
-                   if(Inventory.contains(Globals.ID_BINDING_NECKLACE)){
-                       Inventory.getItem(Globals.ID_BINDING_NECKLACE).getWidgetChild().interact("Wear");
-                       invChangeSleep();
-                   }
-               }
+            if(needNecklace){
+                Bank.withdraw(Globals.ID_BINDING_NECKLACE, 1);
+                invChangeSleep();
+                if(Inventory.contains(Globals.ID_BINDING_NECKLACE)){
+                    Inventory.getItem(Globals.ID_BINDING_NECKLACE).getWidgetChild().interact("Wear");
+                    invChangeSleep();
+                }
+            }
             //        for(int x = 0; x<= ITEMS_EQUIPMENT.length-1; x++){
             //           MistRuneCrafter.status = "Withdrawing equipment items.";
             //           if(ITEMS_EQUIPMENT_AMOUNT[x]==0){
@@ -209,7 +209,7 @@ public class BankHandler extends Node {
             Timer timeCheck2 = new Timer(6000);
             while (timeCheck2.isRunning() && !PouchHandlers.allFull()){
                 fillPouches();
-            if(Inventory.getCount()<=12){Bank.withdraw(Globals.ID_PURE_ESS, 28-Inventory.getCount()); invChangeSleep();}
+                if(Inventory.getCount()<=12){Bank.withdraw(Globals.ID_PURE_ESS, 28-Inventory.getCount()); invChangeSleep();}
             }
             if(!Inventory.isFull()){Bank.withdraw(Globals.ID_PURE_ESS, 28-Inventory.getCount()); invChangeSleep();}
         }

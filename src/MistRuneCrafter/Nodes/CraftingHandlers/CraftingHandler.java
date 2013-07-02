@@ -74,7 +74,7 @@ public class CraftingHandler extends Node {
                 runeCraftAltar.click(true);
                 BankHandler.invChangeSleep();
             }
-            emptyPouches.execute();
+            if(emptyPouches.activate()){emptyPouches.execute();}
             sleepGameTick();
         }while(Settings.get(4)>=1282 && timeCheck.isRunning() && Inventory.contains(Globals.ID_PURE_ESS));
 

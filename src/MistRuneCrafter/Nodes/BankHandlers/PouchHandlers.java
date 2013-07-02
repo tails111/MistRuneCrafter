@@ -73,7 +73,9 @@ public class PouchHandlers extends Node{
         }
 
         public int getEssCount() {
-            return Settings.get(486, this.shift, this.mask);
+          System.out.println(Settings.get(486, this.shift, this.mask));
+            System.out.println(Settings.get(3215, this.shift, this.mask));
+            return (Settings.get(486, this.shift, this.mask));
         }
 
         public int getMaxEss() {
@@ -81,24 +83,25 @@ public class PouchHandlers extends Node{
         }
 
         public boolean isEmpty() {
-         //   return
-          if(Settings.get(720, this.shift2, this.mask2) == 0){
-                System.out.println(this.getId() + " is Empty Returns true");
+            //   return
+            if(Settings.get(720, this.shift2, this.mask2) == 0){
+                System.out.println(this.getId() + " is Empty Returns false");
+                System.out.println(Settings.get(720, this.shift2, this.mask2));
                 return true;
             }
-            System.out.println(this.getId() + " is Empty Returns false");
+            System.out.println(this.getId() + " is Empty Returns true");
             return false;
         }
 
         public boolean isFull() {
-          //  return
-           if(getEssCount() == this.maxEss){
-               System.out.println(this.getId() + " is Full Returns true");
-               return true;
-           }
-            System.out.println(this.getId() + " is Full Returns false");
+            //  return
+            if(getEssCount() == this.maxEss){
+                System.out.println(this.getId() + " is Full Returns true and has " + getEssCount() + " ess.");
+                return true;
+            }
+            System.out.println(this.getId() + " is Full Returns false and has " + getEssCount() + " ess.");
             return false;
-           }
+        }
     }
 
     public static boolean fillPouch(int pouchNum) {
@@ -278,93 +281,93 @@ public class PouchHandlers extends Node{
         }while(!Widgets.get(88,0).visible() && timeCheck.isRunning());
 
         do{
-        if(Widgets.get(88,6) != null){
-            if(Widgets.get(88,6).getChild(14).getText().startsWith("Dark")){
-                for(int y =0; y<6; y++){
-                    MistRuneCrafter.status="Scrolling down.";
-                    if(Widgets.get(88,7) != null){
-                        Widgets.get(88,7).getChild(5).click(true);
-                        Task.sleep(250,500);
+            if(Widgets.get(88,6) != null){
+                if(Widgets.get(88,6).getChild(14).getText().startsWith("Dark")){
+                    for(int y =0; y<6; y++){
+                        MistRuneCrafter.status="Scrolling down.";
+                        if(Widgets.get(88,7) != null){
+                            Widgets.get(88,7).getChild(5).click(true);
+                            Task.sleep(250,500);
+                        }
                     }
+                    Widgets.get(88,6).getChild(14).click(true);
                 }
-                Widgets.get(88,6).getChild(14).click(true);
+                MistRuneCrafter.status="Waiting for Cast";
+                Task.sleep(6000,8000);
             }
-            MistRuneCrafter.status="Waiting for Cast";
-            Task.sleep(6000,8000);
-        }
             waitGameTick();
 
-        if(Widgets.get(1191,17) != null){
-            if(Widgets.get(1191,17).getText().substring(5).startsWith("Hello")){
-                MistRuneCrafter.status="Clicking Continue on Hello";
-                Widgets.get(1191,18).click(true);
-                Task.sleep(600,750);
+            if(Widgets.get(1191,17) != null){
+                if(Widgets.get(1191,17).getText().substring(5).startsWith("Hello")){
+                    MistRuneCrafter.status="Clicking Continue on Hello";
+                    Widgets.get(1191,18).click(true);
+                    Task.sleep(600,750);
+                }
             }
-        }
             waitGameTick();
-        if(Widgets.get(1184,13) != null){
-            if(Widgets.get(1184,13).getText().substring(5).startsWith("What")){
-                MistRuneCrafter.status="Clicking Continue on What";
-                Widgets.get(1184,18).click(true);
-                Task.sleep(600,750);
+            if(Widgets.get(1184,13) != null){
+                if(Widgets.get(1184,13).getText().substring(5).startsWith("What")){
+                    MistRuneCrafter.status="Clicking Continue on What";
+                    Widgets.get(1184,18).click(true);
+                    Task.sleep(600,750);
+                }
             }
-        }
             waitGameTick();
-        if(Widgets.get(1191,17) != null){
-            if(Widgets.get(1191,17).getText().substring(5).startsWith("It")){
-                MistRuneCrafter.status="Clicking Continue on It";
-                Widgets.get(1191,18).click(true);
-                Task.sleep(600,750);
+            if(Widgets.get(1191,17) != null){
+                if(Widgets.get(1191,17).getText().substring(5).startsWith("It")){
+                    MistRuneCrafter.status="Clicking Continue on It";
+                    Widgets.get(1191,18).click(true);
+                    Task.sleep(600,750);
+                }
             }
-        }
             waitGameTick();
-        if(Widgets.get(1184,13) != null){
-             if(Widgets.get(1184,13).getText().substring(5).startsWith("Are")){
-                MistRuneCrafter.status="Clicking Continue on Are";
-                Widgets.get(1184,18).click(true);
-                Task.sleep(600,750);
+            if(Widgets.get(1184,13) != null){
+                if(Widgets.get(1184,13).getText().substring(5).startsWith("Are")){
+                    MistRuneCrafter.status="Clicking Continue on Are";
+                    Widgets.get(1184,18).click(true);
+                    Task.sleep(600,750);
+                }
             }
-        }
             waitGameTick();
-        if(Widgets.get(1191,17) != null){
-            if(Widgets.get(1191,17).getText().substring(5).startsWith("Sorry")){
-                MistRuneCrafter.status="Clicking Continue on Sorry";
-                Widgets.get(1191,18).click(true);
-                Task.sleep(600,750);
+            if(Widgets.get(1191,17) != null){
+                if(Widgets.get(1191,17).getText().substring(5).startsWith("Sorry")){
+                    MistRuneCrafter.status="Clicking Continue on Sorry";
+                    Widgets.get(1191,18).click(true);
+                    Task.sleep(600,750);
+                }
             }
-        }
             waitGameTick();
-        if(Widgets.get(1184,13) != null){
-            if(Widgets.get(1184,13).getText().substring(5).startsWith("What?")){
-                MistRuneCrafter.status="Clicking Continue on What?";
-                Widgets.get(1184,18).click(true);
-                Task.sleep(600,750);
+            if(Widgets.get(1184,13) != null){
+                if(Widgets.get(1184,13).getText().substring(5).startsWith("What?")){
+                    MistRuneCrafter.status="Clicking Continue on What?";
+                    Widgets.get(1184,18).click(true);
+                    Task.sleep(600,750);
+                }
             }
-        }
             waitGameTick();
-        if(Widgets.get(1188,24) != null){
-            if(Widgets.get(1188,24).getText().startsWith("Can you repair")){
-                MistRuneCrafter.status="Clicking Repair";
-                Widgets.get(1188,24).click(true);
-                Task.sleep(600,750);
+            if(Widgets.get(1188,24) != null){
+                if(Widgets.get(1188,24).getText().startsWith("Can you repair")){
+                    MistRuneCrafter.status="Clicking Repair";
+                    Widgets.get(1188,24).click(true);
+                    Task.sleep(600,750);
+                }
             }
-        }
             waitGameTick();
-        if(Widgets.get(1191,17) != null){
-            if(Widgets.get(1191,17).getText().substring(5).startsWith("Can you")){
-                MistRuneCrafter.status="Clicking Continue on Can you";
-                Widgets.get(1191,18).click(true);
-                Task.sleep(600,750);
+            if(Widgets.get(1191,17) != null){
+                if(Widgets.get(1191,17).getText().substring(5).startsWith("Can you")){
+                    MistRuneCrafter.status="Clicking Continue on Can you";
+                    Widgets.get(1191,18).click(true);
+                    Task.sleep(600,750);
+                }
             }
-        }
             waitGameTick();
-        if(Widgets.get(1184,13) != null){
-            if(Widgets.get(1184,13).getText().substring(5).startsWith("A simple")){
-                MistRuneCrafter.status="Clicking Continue on A simple";
-                Widgets.get(1184,18).click(true);
-                Task.sleep(600,750);
+            if(Widgets.get(1184,13) != null){
+                if(Widgets.get(1184,13).getText().substring(5).startsWith("A simple")){
+                    MistRuneCrafter.status="Clicking Continue on A simple";
+                    Widgets.get(1184,18).click(true);
+                    Task.sleep(600,750);
+                }
             }
-        }
             waitGameTick();
         }while(PouchHandlers.haveDegraded());
     }
