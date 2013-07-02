@@ -108,7 +108,7 @@ public class PouchHandlers extends Node{
         if(pouchNum==Globals.ID_SMALL_POUCH){pouch = Pouch.SMALL;}
 
         final Item item = pouch.getItem();
-        if (item != null) {
+        if (item != null && !pouch.isFull()) {
             MistRuneCrafter.status="Filling " + item.getName();
             return item.getWidgetChild().interact("Fill", item.getName());
         }
@@ -223,8 +223,9 @@ public class PouchHandlers extends Node{
             Task.sleep(500,750);
             for(int x = 0; x<= Globals.ITEMS_OPTIONAL.length-1; x++){
                 MistRuneCrafter.status = "Withdrawing pouches.";
-                Bank.withdraw(Globals.ITEMS_OPTIONAL[x], Globals.ITEMS_OPTIONAL_AMOUNTS[x]);
-                Task.sleep(500,1000);
+                if(Bank.withdraw(Globals.ITEMS_OPTIONAL[x], Globals.ITEMS_OPTIONAL_AMOUNTS[x])){
+                    BankHandler.invChangeSleep();
+                }
             };
             int x = 0;
             do{

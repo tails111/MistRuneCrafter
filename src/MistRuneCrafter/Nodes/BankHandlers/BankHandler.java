@@ -107,8 +107,7 @@ public class BankHandler extends Node {
                 invChangeSleep();
             }
             MistRuneCrafter.status="Filling Pouches through BankHandler";
-            PouchHandlers.fillPouch(Globals.ITEMS_OPTIONAL[x]);
-            invChangeSleep();
+            if(PouchHandlers.fillPouch(Globals.ITEMS_OPTIONAL[x])){invChangeSleep();}
             if(PouchHandlers.allFull()){ System.out.println("PouchHandlers.allFull{} = false "); return false;}
         }
         return true;
@@ -162,8 +161,7 @@ public class BankHandler extends Node {
             invChangeSleep();
             for(int x = 0; x<= Globals.ITEMS_REQUIRED.length-2; x++){
                 MistRuneCrafter.status = "Withdrawing required items.";
-                Bank.withdraw(Globals.ITEMS_REQUIRED[x],Globals.ITEMS_REQUIRED_AMOUNTS[x]);
-                invChangeSleep();
+                if(Bank.withdraw(Globals.ITEMS_REQUIRED[x],Globals.ITEMS_REQUIRED_AMOUNTS[x])){invChangeSleep();}
             }
             if(needNecklace){
                 Bank.withdraw(Globals.ID_BINDING_NECKLACE, 1);
