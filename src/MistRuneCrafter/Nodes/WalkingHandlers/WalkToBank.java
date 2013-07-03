@@ -3,6 +3,7 @@ package MistRuneCrafter.Nodes.WalkingHandlers;
 import MistRuneCrafter.MistRuneCrafter;
 import MistRuneCrafter.Nodes.BankHandlers.BankHandler;
 import MistRuneCrafter.Nodes.BankHandlers.PouchHandlers;
+import MistRuneCrafter.Nodes.CraftingHandlers.EmptyPouchHandler;
 import MistRuneCrafter.Nodes.Globals;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
@@ -27,7 +28,7 @@ public class WalkToBank extends Node {
     @Override
     public boolean activate(){
         return (Inventory.contains(4695) && !Inventory.contains(Globals.ID_PURE_ESS)
-                && Calculations.distanceTo(bankTile)>=7 && !PouchHandlers.Pouch.allFull());
+                && Calculations.distanceTo(bankTile)>=7 || PouchHandlers.Pouch.allEmpty());
     }
 
     @Override

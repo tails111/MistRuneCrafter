@@ -40,33 +40,36 @@ public class CraftingHandler extends Node {
                     if(BankHandler.invChangeSleep()){break;}
                 }while(timeCheck2.isRunning());
             }
+            emptyPouches.execute();
         }while(Inventory.contains(Globals.ID_PURE_ESS) && timeCheck.isRunning());
     }
 
     @Override
     public boolean activate(){
         SceneObject runeCraftAltar = SceneEntities.getNearest(AIR_ALTAR);
-        return (runeCraftAltar != null && Inventory.containsAll(Globals.ID_PURE_ESS, Globals.ID_RUNE_WATER));
+        if(runeCraftAltar != null){finishCrafting(runeCraftAltar);}
+        return (runeCraftAltar != null && Inventory.containsAll(Globals.ID_PURE_ESS, Globals.ID_RUNE_WATER) && PouchHandlers.Pouch.allFull()
+                && !Inventory.contains(Globals.ID_RUNE_AIR));
     }
 
     @Override
     public void execute(){;
-        Timer timeCheck = new Timer(12000);
+        System.out.println("Executing Craft Runes.");
+        Timer timeCheck = new Timer(15000);
         SceneObject runeCraftAltar = SceneEntities.getNearest(AIR_ALTAR);
         MistRuneCrafter.status="Attempting to Craft Runes.";
         do{
             if(Settings.get(4)==1282){
                 MistRuneCrafter.status="Navigating to Altar";
-                Camera.turnTo(runeCraftAltar);
                 Walking.walk(runeCraftAltar);
+                Camera.turnTo(runeCraftAltar);
+
             }
             if(castImbue.activate()){
                 castImbue.execute();
             }
             if(Settings.get(4)>1282 && Inventory.contains(Globals.ID_PURE_ESS)){
-                if(!runeCraftAltar.isOnScreen()){
-                    Camera.turnTo(runeCraftAltar);
-                }
+                Camera.turnTo(runeCraftAltar);
                 MistRuneCrafter.status="Crafting Mist Runes.";
                 MistRuneCrafter.interacting = Inventory.getItem(Globals.ID_RUNE_WATER).getWidgetChild();
                 Inventory.getItem(Globals.ID_RUNE_WATER).getWidgetChild().interact("Use");
@@ -77,14 +80,18 @@ public class CraftingHandler extends Node {
             if(emptyPouches.activate()){emptyPouches.execute();}
             sleepGameTick();
         }while(Settings.get(4)>1282 && timeCheck.isRunning() && Inventory.contains(Globals.ID_PURE_ESS));
+        if(emptyPouches.activate()){emptyPouches.execute();}
 
+        Timer timeCheck2 = new Timer(6000);
         do{
-            if(emptyPouches.activate()){emptyPouches.execute();}
+            if(Inventory.contains(Globals.ID_RUNE_AIR) && !PouchHandlers.Pouch.allEmpty()){
+                emptyPouches.execute();
+            }
             sleepGameTick();
             finishCrafting(runeCraftAltar);
-        }while(Inventory.contains(Globals.ID_PURE_ESS) && !Inventory.contains(Globals.ID_RUNE_ASTRAL));
-
-        sleepGameTick();
+        }while(Inventory.contains(Globals.ID_PURE_ESS) && !Inventory.contains(Globals.ID_RUNE_ASTRAL) && timeCheck2.isRunning());
+        System.out.println("At the end of CraftingHandler.");
+        Task.sleep(1000);
         MistRuneCrafter.postedProfit= MistRuneCrafter.postedProfit + (Inventory.getItem(Globals.ID_RUNE_MIST).getStackSize()*Globals.RUNE_MIST_PRICE);
         MistRuneCrafter.postedCrafts= MistRuneCrafter.postedCrafts + Inventory.getItem(Globals.ID_RUNE_MIST).getStackSize();
     }

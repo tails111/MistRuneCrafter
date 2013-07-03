@@ -95,7 +95,7 @@ public class PouchHandlers extends Node{
         if(pouchNum==Globals.ID_SMALL_POUCH){pouch = Pouch.SMALL;}
 
         final Item item = pouch.getItem();
-        if (item != null) {
+        if (item != null && !pouch.isFull()) {
             MistRuneCrafter.status="Filling " + item.getName();
             return item.getWidgetChild().interact("Fill", item.getName());
         }
@@ -112,9 +112,8 @@ public class PouchHandlers extends Node{
 
         final Item item = pouch.getItem();
 
-        if (item != null) {
+        if (item != null && !pouch.isEmpty() && (Inventory.getCount()-pouch.getEssCount()>=0)) {
             MistRuneCrafter.status="Emptying " + item.getName();
-            System.out.println(item.getName() + " is attempting to be emptied.");
             return item.getWidgetChild().interact("Empty", item.getName());
         }
         return false;

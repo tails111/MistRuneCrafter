@@ -58,6 +58,9 @@ public class WalkToAltar  extends Node {
                     Task.sleep(60,85);
                     MistRuneCrafter.status="Waiting to enter altar for: " + (timeCheck.getRemaining()/1000);
                 }while(runeCraftAltar == null && timeCheck.isRunning() && Players.getLocal().isMoving());
+               if(runeCraftAltar!=null){
+                   Camera.turnTo(runeCraftAltar);
+               }
            }
            MistRuneCrafter.status="Done walking to Altar.";
        }
