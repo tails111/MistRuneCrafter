@@ -46,7 +46,7 @@ public class CraftingHandler extends Node {
     @Override
     public boolean activate(){
         SceneObject runeCraftAltar = SceneEntities.getNearest(AIR_ALTAR);
-        return (runeCraftAltar != null && Inventory.containsAll(Globals.ID_PURE_ESS, Globals.ID_RUNE_WATER) && PouchHandlers.Pouch.allFull());
+        return (runeCraftAltar != null && Inventory.containsAll(Globals.ID_PURE_ESS, Globals.ID_RUNE_WATER));
     }
 
     @Override
