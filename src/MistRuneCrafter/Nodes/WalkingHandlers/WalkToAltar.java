@@ -40,7 +40,7 @@ public class WalkToAltar  extends Node {
     public void execute(){
        MistRuneCrafter.status="Walking to Altar.";
        Walking.newTilePath(toAltar).traverse();
-        SceneObject toAltarObj = SceneEntities.getNearest(AIR_RUINS);
+       SceneObject toAltarObj = SceneEntities.getNearest(AIR_RUINS);
         if(Inventory.contains(Globals.ID_BINDING_NECKLACE)){
             Inventory.getItem(Globals.ID_BINDING_NECKLACE).getWidgetChild().interact("Wear");
             BankHandler.invChangeSleep();
@@ -55,7 +55,7 @@ public class WalkToAltar  extends Node {
                MistRuneCrafter.status="Clicking altar";
                toAltarObj.interact("Enter");
                 do{
-                    Task.sleep(60,85);
+                    Task.sleep(2000,3500);
                     MistRuneCrafter.status="Waiting to enter altar for: " + (timeCheck.getRemaining()/1000);
                 }while(runeCraftAltar == null && timeCheck.isRunning() && Players.getLocal().isMoving());
                if(runeCraftAltar!=null){

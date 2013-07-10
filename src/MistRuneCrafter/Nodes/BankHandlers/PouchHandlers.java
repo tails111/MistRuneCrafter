@@ -16,6 +16,7 @@ import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.Tile;
 import org.powerbot.game.api.wrappers.node.Item;
 import org.powerbot.game.api.wrappers.node.SceneObject;
+import org.powerbot.game.api.wrappers.widget.WidgetChild;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -143,6 +144,7 @@ public class PouchHandlers extends Node{
 
     public static boolean allFull() {
         for (Pouch p : getPouches()) {
+            System.out.println(p.getItem().getName()+" has " + p.getEssCount() + " and " + p.isFull());
             if (!p.isFull()) {
                 MistRuneCrafter.status="All Full return false and has " + p.getEssCount() + " ess.";;
                 return false;
@@ -168,6 +170,11 @@ public class PouchHandlers extends Node{
     }
 
 
+    SceneObject bankBooth;
+    WidgetChild meSpeak;
+    WidgetChild mageSpeak;
+    WidgetChild specialSpeak;
+
     @Override
     public boolean activate(){
         return (PouchHandlers.Pouch.haveDegraded());
@@ -175,7 +182,8 @@ public class PouchHandlers extends Node{
 
     @Override
     public void execute(){
-        SceneObject bankBooth = SceneEntities.getNearest(Globals.BANK_BOOTH_IDS);
+
+        bankBooth = SceneEntities.getNearest(Globals.BANK_BOOTH_IDS);
 
         if(!Bank.isOpen() && !Widgets.get(88,0).visible() && !Widgets.get(1191,17).visible()
                 && !Widgets.get(1184,13).visible() ){
@@ -219,29 +227,7 @@ public class PouchHandlers extends Node{
             }while(Bank.isOpen() && x<=10);
 
         }
-        //Giant Pouch degrade 5515
-//NPC Contact screen = WIDGET 88
-//Widget Child 0, check visible.
-//Widget Child 6, Child 14, get text = Dark Mage
-//Widget Child 7, Child 5, click 5 times.
 
-//WIDGET 1191, Child 17, "<p=3>Hello?"
-//Child 18, Click
-//WIDGET 1184, Child 13, "<p=4>What is this?!"
-//Child 18, Click
-//WIDGET 1191, Child 17, "<p=3>It"
-//Child 18, Click
-//WIDGET 1184, Child 13, "<p=4>Are"
-//Child 18, Click
-//WIDGET 1191, Child 17, "<p=2>Sorry"
-//Child 18, Click
-//WIDGET 1184, Child 13, "<p=4>What?"
-//Child 18, Click
-//WIDGET 1188, Child 24, "Can you repair my pouches?", CLICK IT
-//WIDGET 1191, Child 17, "<p=3>Can you?"
-//Child 18, Click
-//WIDGET 1184, Child 13, "<p=2>A simple"
-//Child 18, Click
         Timer timeCheck2 = new Timer(10000);
         do{
             Task.sleep(20);
@@ -261,6 +247,10 @@ public class PouchHandlers extends Node{
         }while(!Widgets.get(88,0).visible() && timeCheck.isRunning());
 
         do{
+            meSpeak = Widgets.get(1191,17);
+            mageSpeak = Widgets.get(1184,13);
+            specialSpeak = Widgets.get(1188,24);
+
             if(Widgets.get(88,6) != null){
                 if(Widgets.get(88,6).getChild(14).getText().startsWith("Dark")){
                     for(int y =0; y<6; y++){
@@ -277,72 +267,72 @@ public class PouchHandlers extends Node{
             }
             waitGameTick();
 
-            if(Widgets.get(1191,17) != null){
-                if(Widgets.get(1191,17).getText().substring(5).startsWith("Hello")){
+            if(meSpeak != null){
+                if(meSpeak.getText().substring(5).startsWith("Hello")){
                     MistRuneCrafter.status="Clicking Continue on Hello";
                     Widgets.get(1191,18).click(true);
                     Task.sleep(600,750);
                 }
             }
             waitGameTick();
-            if(Widgets.get(1184,13) != null){
-                if(Widgets.get(1184,13).getText().substring(5).startsWith("What")){
+            if(mageSpeak != null){
+                if(mageSpeak.getText().substring(5).startsWith("What")){
                     MistRuneCrafter.status="Clicking Continue on What";
                     Widgets.get(1184,18).click(true);
                     Task.sleep(600,750);
                 }
             }
             waitGameTick();
-            if(Widgets.get(1191,17) != null){
-                if(Widgets.get(1191,17).getText().substring(5).startsWith("It")){
+            if(meSpeak != null){
+                if(meSpeak.getText().substring(5).startsWith("It")){
                     MistRuneCrafter.status="Clicking Continue on It";
                     Widgets.get(1191,18).click(true);
                     Task.sleep(600,750);
                 }
             }
             waitGameTick();
-            if(Widgets.get(1184,13) != null){
-                if(Widgets.get(1184,13).getText().substring(5).startsWith("Are")){
+            if(mageSpeak != null){
+                if(mageSpeak.getText().substring(5).startsWith("Are")){
                     MistRuneCrafter.status="Clicking Continue on Are";
                     Widgets.get(1184,18).click(true);
                     Task.sleep(600,750);
                 }
             }
             waitGameTick();
-            if(Widgets.get(1191,17) != null){
-                if(Widgets.get(1191,17).getText().substring(5).startsWith("Sorry")){
+            if(meSpeak != null){
+                if(meSpeak.getText().substring(5).startsWith("Sorry")){
                     MistRuneCrafter.status="Clicking Continue on Sorry";
                     Widgets.get(1191,18).click(true);
                     Task.sleep(600,750);
                 }
             }
             waitGameTick();
-            if(Widgets.get(1184,13) != null){
-                if(Widgets.get(1184,13).getText().substring(5).startsWith("What?")){
+            if(mageSpeak != null){
+                if(mageSpeak.getText().substring(5).startsWith("What?")){
                     MistRuneCrafter.status="Clicking Continue on What?";
                     Widgets.get(1184,18).click(true);
                     Task.sleep(600,750);
                 }
             }
             waitGameTick();
-            if(Widgets.get(1188,24) != null){
-                if(Widgets.get(1188,24).getText().startsWith("Can you repair")){
+            if(specialSpeak != null){
+                if(specialSpeak.getText().startsWith("Can you repair")){
                     MistRuneCrafter.status="Clicking Repair";
                     Widgets.get(1188,24).click(true);
                     Task.sleep(600,750);
                 }
             }
             waitGameTick();
-            if(Widgets.get(1191,17) != null){
-                if(Widgets.get(1191,17).getText().substring(5).startsWith("Can you")){
+            if(meSpeak != null){
+                if(meSpeak.getText().substring(5).startsWith("Can you")){
                     MistRuneCrafter.status="Clicking Continue on Can you";
                     Widgets.get(1191,18).click(true);
                     Task.sleep(600,750);
                 }
             }
             waitGameTick();
-            if(Widgets.get(1184,13) != null){
-                if(Widgets.get(1184,13).getText().substring(5).startsWith("A simple")){
+            if(mageSpeak != null){
+                if(mageSpeak.getText().substring(5).startsWith("A simple")){
                     MistRuneCrafter.status="Clicking Continue on A simple";
                     Widgets.get(1184,18).click(true);
                     Task.sleep(600,750);

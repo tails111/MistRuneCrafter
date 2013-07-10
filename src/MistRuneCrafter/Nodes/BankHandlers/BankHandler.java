@@ -12,6 +12,7 @@ import org.powerbot.game.api.methods.node.SceneEntities;
 import org.powerbot.game.api.methods.tab.Equipment;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Bank;
+import org.powerbot.game.api.methods.widget.Camera;
 import org.powerbot.game.api.util.Random;
 import org.powerbot.game.api.util.Timer;
 import org.powerbot.game.api.wrappers.Tile;
@@ -49,34 +50,6 @@ public class BankHandler extends Node {
         return (Inventory.containsAll(Globals.ITEMS_REQUIRED));
     }
 
-    public boolean haveTiara(){
-        if(Equipment.getCount(Globals.ID_TIARA_AIR)>=1){
-            Globals.TIARA_AIR_AMOUNT = 1;
-            return true;
-        }
-        if(Equipment.getCount(Globals.ID_TIARA_ELEMENTAL)>=1){
-            Globals.TIARA_ELEMENTAL_AMOUNT = 1;
-            return true;
-        }
-        if(Equipment.getCount(Globals.ID_TIARA_OMNI)>=1){
-            Globals.TIARA_OMNI_AMOUNT = 1;
-            return true;
-        }
-        return false;
-    }
-
-    public boolean haveStaff(){
-        if(Equipment.getCount(Globals.ID_STEAM_STAFF)>=1){
-            Globals.STEAM_STAFF_AMOUNT = 1;
-            return true;
-        }
-        if(Equipment.getCount(Globals.ID_STEAM_BATTLESTAFF)>=1){
-            Globals.STEAM_BATTLESTAFF_AMOUNT = 1;
-            return true;
-        }
-        return false;
-    }
-
     public boolean haveNecklace(){
         if(Equipment.getCount(Globals.ID_BINDING_NECKLACE)>=1){
             Globals.BINDING_NECKLACE_AMOUNT = 1;
@@ -86,7 +59,6 @@ public class BankHandler extends Node {
     }
 
     public static boolean invChangeSleep(){
-
         Timer timeCheck = new Timer(Random.nextInt(1200,1600));
         int tempInvCount = Inventory.getCount();
         int newInvCount;
@@ -108,7 +80,7 @@ public class BankHandler extends Node {
             }
             MistRuneCrafter.status="Filling Pouches through BankHandler";
             if(PouchHandlers.Pouch.fillPouch(Globals.ITEMS_OPTIONAL[x])){invChangeSleep();}
-            if(PouchHandlers.Pouch.allFull()){ System.out.println("PouchHandlers.allFull{} = false "); return false;}
+            if(PouchHandlers.Pouch.allFull()){ System.out.println("PouchHandlers.allFull{} = true "); return false;}
         }
         return true;
     }
@@ -122,20 +94,11 @@ public class BankHandler extends Node {
 
     @Override
     public void execute(){
-        boolean needTiara = false;
-        boolean needStaff = false;
         boolean needNecklace = false;
-
         SceneObject bankBooth = SceneEntities.getNearest(Globals.BANK_BOOTH_IDS);
 
         if(pouchControl.activate()){
             pouchControl.execute();
-        }
-        if(!haveTiara()){
-            needTiara   =  true;
-        }
-        if(!haveStaff()){
-            needStaff = true;
         }
         if(!haveNecklace()){
             needNecklace = true;
@@ -147,6 +110,7 @@ public class BankHandler extends Node {
             do{
                 x++;
                 MistRuneCrafter.interacting=bankBooth;
+                Camera.turnTo(bankBooth, 25);
                 bankBooth.interact("Bank");
                 Task.sleep(750,1000);
                 do{
@@ -171,28 +135,6 @@ public class BankHandler extends Node {
                     invChangeSleep();
                 }
             }
-            //        for(int x = 0; x<= ITEMS_EQUIPMENT.length-1; x++){
-            //           MistRuneCrafter.status = "Withdrawing equipment items.";
-            //           if(ITEMS_EQUIPMENT_AMOUNT[x]==0){
-            //               x++;
-            //           }
-            //          if(ITEMS_EQUIPMENT_AMOUNT[x]==1){
-            //              Bank.withdraw(ITEMS_EQUIPMENT[x], ITEMS_EQUIPMENT_AMOUNT[x]);
-            //             Task.sleep(500,1000);
-            //            if(Inventory.contains(ITEMS_EQUIPMENT)){
-            //               MistRuneCrafter.status= "Equipping items.";
-            //              if(!Inventory.getItem(ITEMS_EQUIPMENT).getWidgetChild().interact("Wear")){
-            //                  if(!Inventory.getItem(ITEMS_EQUIPMENT).getWidgetChild().interact("Equip")){
-            //                      Inventory.getItem(ITEMS_EQUIPMENT).getWidgetChild().interact("Wield");
-            //                 }
-            //
-            //            }
-            //        }
-            //        ITEMS_EQUIPMENT_AMOUNT[x]=0;
-            //        Task.sleep(500,750);
-            //    }
-            // }
-            // }
             for(int x = 0; x<= Globals.ITEMS_OPTIONAL.length-1; x++){
                 MistRuneCrafter.status = "Withdrawing pouches.";
                 if(Bank.withdraw(Globals.ITEMS_OPTIONAL[x], Globals.ITEMS_OPTIONAL_AMOUNTS[x])){
@@ -219,7 +161,8 @@ public class BankHandler extends Node {
             Bank.close();
             Task.sleep(125,250);
         }while(Bank.isOpen() && x<=10);
-
+        Globals.idleImbueSetting = Settings.get(4);
+        System.out.println("Idle Imbue = " + Globals.idleImbueSetting);
     }
 
 }

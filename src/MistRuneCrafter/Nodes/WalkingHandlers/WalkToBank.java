@@ -28,7 +28,7 @@ public class WalkToBank extends Node {
     @Override
     public boolean activate(){
         return (Inventory.contains(4695) && !Inventory.contains(Globals.ID_PURE_ESS)
-                && Calculations.distanceTo(bankTile)>=7 || PouchHandlers.Pouch.allEmpty());
+                && Calculations.distanceTo(bankTile)>=7 || PouchHandlers.Pouch.allEmpty() && Inventory.contains(Globals.ID_RUNE_AIR));
     }
 
     @Override

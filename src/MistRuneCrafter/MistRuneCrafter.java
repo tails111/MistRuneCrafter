@@ -23,7 +23,7 @@ import org.powerbot.game.client.Client;
 
 import java.awt.*;
 
-@Manifest(name = "Mist Rune Crafter", authors = "tails111@powerbot.org", description = "Creates Mist Runes at the Air Altar using Magic Imbue and Binding Necklaces", version = 1.0, hidden = false)
+@Manifest(name = "Mist Rune Crafter", authors = "tails111", description = "Creates Mist Runes at the Air Altar using Magic Imbue and Binding Necklaces", version = 1.0, hidden = false)
 public class MistRuneCrafter extends ActiveScript implements PaintListener{
 
     private Client client = Bot.client();
